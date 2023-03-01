@@ -38,6 +38,7 @@ const SidebarNavItem = (props: SidebarNavItemProps) => {
     icon,
     children,
     href,
+    logo
   } = props
 
   return (
@@ -141,67 +142,43 @@ export default function SidebarNav() {
         Sample (CSR)
         <small className="ms-auto"><Badge bg="danger" className="ms-auto">DEMO</Badge></small>
       </SidebarNavItem>
-      <SidebarNavTitle>Theme</SidebarNavTitle>
-      <SidebarNavItem icon={faDroplet} href="colors.html">Colors</SidebarNavItem>
-      <SidebarNavItem icon={faPencil} href="typography.html">Typography</SidebarNavItem>
-      <SidebarNavTitle>Components</SidebarNavTitle>
+      <SidebarNavTitle>Useful Links</SidebarNavTitle>
+      <SidebarNavItem icon={faDroplet} href="https://coreui.io/demos/next-js/1.0/dark/components/colors.html">Colors</SidebarNavItem>
+      <SidebarNavItem icon={faPencil} href="https://coreui.io/demos/next-js/1.0/dark/components/typography.html">Typography</SidebarNavItem>
+      <SidebarNavTitle>Types of Available Components</SidebarNavTitle>
 
-      <SidebarNavGroup toggleIcon={faPuzzlePiece} toggleText="Base">
-        <SidebarNavItem href="base/accordion.html">Accordion</SidebarNavItem>
-        <SidebarNavItem href="base/breadcrumb.html">Breadcrumb</SidebarNavItem>
-        <SidebarNavItem href="base/cards.html">Cards</SidebarNavItem>
-        <SidebarNavItem href="base/carousel.html">Carousel</SidebarNavItem>
-        <SidebarNavItem href="base/collapse.html">Collapse</SidebarNavItem>
-        <SidebarNavItem href="base/list-group.html">List group</SidebarNavItem>
-        <SidebarNavItem href="base/navs.html">Navs</SidebarNavItem>
-        <SidebarNavItem href="base/pagination.html">Pagination</SidebarNavItem>
-        <SidebarNavItem href="base/popovers.html">Popovers</SidebarNavItem>
-        <SidebarNavItem href="base/progress.html">Progress</SidebarNavItem>
-        <SidebarNavItem href="base/scrollspy.html">Scrollspy</SidebarNavItem>
-        <SidebarNavItem href="base/spinners.html">Spinners</SidebarNavItem>
-        <SidebarNavItem href="base/tables.html">Tables</SidebarNavItem>
-        <SidebarNavItem href="base/tabs.html">Tabs</SidebarNavItem>
-        <SidebarNavItem href="base/tooltips.html">Tooltips</SidebarNavItem>
-      </SidebarNavGroup>
-
-      <SidebarNavGroup toggleIcon={faLocationArrow} toggleText="Buttons">
-        <SidebarNavItem href="buttons/buttons.html">Buttons</SidebarNavItem>
-        <SidebarNavItem href="buttons/button-group.html">Buttons Group</SidebarNavItem>
-        <SidebarNavItem href="buttons/dropdowns.html">Dropdowns</SidebarNavItem>
-      </SidebarNavGroup>
-
-      <SidebarNavItem icon={faChartPie} href="charts.html">Charts</SidebarNavItem>
+      <SidebarNavItem icon={faChartPie} href="https://coreui.io/demos/next-js/1.0/dark/plugins/charts">Charts</SidebarNavItem>
 
       <SidebarNavGroup toggleIcon={faFileLines} toggleText="Forms">
-        <SidebarNavItem href="forms/form-control.html">Form Control</SidebarNavItem>
-        <SidebarNavItem href="forms/select.html">Select</SidebarNavItem>
-        <SidebarNavItem href="forms/checks-radios.html">Checks and radios</SidebarNavItem>
-        <SidebarNavItem href="forms/range.html">Range</SidebarNavItem>
-        <SidebarNavItem href="forms/input-group.html">Input group</SidebarNavItem>
-        <SidebarNavItem href="forms/floating-labels.html">Floating labels</SidebarNavItem>
-        <SidebarNavItem href="forms/layout.html">Layout</SidebarNavItem>
-        <SidebarNavItem href="forms/validation.html">Validation</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/form-control">Form Control</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/select.html">Select</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/checks-radios.html">Checks and radios</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/range.html">Range</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/input-group.html">Input group</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/floating-labels.html">Floating labels</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/layout.html">Layout</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/validation.html">Validation</SidebarNavItem>
       </SidebarNavGroup>
 
       <SidebarNavGroup toggleIcon={faStar} toggleText="Icons">
-        <SidebarNavItem href="icons/coreui-icons-free.html">CoreUI Icons</SidebarNavItem>
-        <SidebarNavItem href="icons/coreui-icons-brand.html">CoreUI Icons - Brand</SidebarNavItem>
-        <SidebarNavItem href="icons/coreui-icons-flag.html">CoreUI Icons - Flag</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/icons/coreui-icons-free.html">CoreUI Icons</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/icons/coreui-icons-brand.html">CoreUI Icons - Brand</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/icons/coreui-icons-flag.html">CoreUI Icons - Flag</SidebarNavItem>
       </SidebarNavGroup>
 
       <SidebarNavGroup toggleIcon={faBell} toggleText="Notifications">
-        <SidebarNavItem href="notifications/alerts.html">Alerts</SidebarNavItem>
-        <SidebarNavItem href="notifications/badge.html">Badge</SidebarNavItem>
-        <SidebarNavItem href="notifications/modals.html">Modals</SidebarNavItem>
-        <SidebarNavItem href="notifications/toasts.html">Toasts</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/notifications/alerts.html">Alerts</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/notifications/badge.html">Badge</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/notifications/modals.html">Modals</SidebarNavItem>
+        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/notifications/toasts.html">Toasts</SidebarNavItem>
       </SidebarNavGroup>
 
-      <SidebarNavItem icon={faCalculator} href="widgets.html">
+      <SidebarNavItem icon={faCalculator} href="https://coreui.io/demos/next-js/1.0/dark/components/widgets">
         Widgets
         <small className="ms-auto"><Badge bg="info">NEW</Badge></small>
       </SidebarNavItem>
 
-      <SidebarNavTitle>Extras</SidebarNavTitle>
+      <SidebarNavTitle>Misc</SidebarNavTitle>
 
       <SidebarNavGroup toggleIcon={faStar} toggleText="Pages">
         <SidebarNavItem icon={faRightToBracket} href="login">Login</SidebarNavItem>
@@ -211,7 +188,6 @@ export default function SidebarNav() {
       </SidebarNavGroup>
 
       <SidebarNavItem icon={faFileLines} href="docs.html">Docs</SidebarNavItem>
-      <SidebarNavItem icon={faLayerGroup} href="https://coreui.io/pro/">Try CoreUI PRO</SidebarNavItem>
     </ul>
   )
 }

@@ -6,21 +6,25 @@ export default function Footer() {
       <div>
         <a className="text-decoration-none" href="https://coreui.io">CoreUI </a>
         <a className="text-decoration-none" href="https://coreui.io">
-          Bootstrap Admin
-          Template
+          Bootstraped Example
         </a>
         {' '}
-        © 2021
-        creativeLabs.
+        2023
+        Prototype.
       </div>
       <div className="ms-md-auto">
-        Powered by&nbsp;
+        Based on &nbsp;
         <a
           className="text-decoration-none"
           href="@layout/AdminLayout/AdminLayout"
         >
-          CoreUI UI
-          Components
+           CoreUI UI Components with
+        </a>
+        <a
+          className="text-decoration-none"
+          href="https://www.datocms.com"
+
+        > DatoCMS
         </a>
       </div>
     </footer>

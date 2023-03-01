@@ -1,0 +1,39 @@
+query Clients {
+  allClients {
+    id
+    _status
+    enable
+    clientName
+    clientColour{
+      alpha
+      blue
+      green
+      hex
+      red
+    }
+    url
+    enableLooker
+    enableSalesforce
+    _createdAt
+    _publishedAt
+    clientLogo {
+      ...responsiveImage
+    }
+  }
+}
+
+fragment responsiveImage on FileFieldInterface {
+  responsiveImage(imgixParams: { w: 300, h: 300, auto: format }) {
+    webpSrcSet
+    alt
+    aspectRatio
+    base64
+    bgColor
+    height
+    sizes
+    src
+    srcSet
+    title
+    width
+  }
+}

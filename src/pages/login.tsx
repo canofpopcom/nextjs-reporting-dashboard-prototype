@@ -1,17 +1,24 @@
-import { NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import {
   Button, Col, Container, Form, InputGroup, Row,
 } from 'react-bootstrap'
+
 import Link from 'next/link'
 import { SyntheticEvent, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { deleteCookie, getCookie } from 'cookies-next'
 
-const Login: NextPage = () => {
+import Image from 'next/image'
+import { Image as DatoImage } from 'react-datocms'
+import { LoginDocument, LoginQuery } from '../../graphql/generated'
+import { datocms } from '../lib/datocms'
+
+const Login: NextPage<Props> = ({ result }) => {
+
   const router = useRouter()
   const [submitting, setSubmitting] = useState(false)
 
@@ -26,6 +33,7 @@ const Login: NextPage = () => {
   }
 
   const login = async (e: SyntheticEvent) => {
+
     e.stopPropagation()
     e.preventDefault()
 
@@ -99,23 +107,30 @@ const Login: NextPage = () => {
                   </form>
                 </div>
               </Col>
+
+              {result.allLogins.map((Login) => (
               <Col
                 md={5}
                 className="bg-primary text-white d-flex align-items-center justify-content-center p-5"
+                style={{backgroundColor: Login.brandColour?.hex}}
               >
-                <div className="text-center">
-                  <h2>Sign up</h2>
+                <div key={Login.id} className="text-center">
+                 <Image 
+                  width={200}
+                  height={50}
+                  src={Login.brandLogo.url} />
+                  <h2>{Login.loginTitle}</h2>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
+                    {Login.loginIntro}
                   </p>
                   <Link href="/register">
                     <button className="btn btn-lg btn-outline-light mt-3" type="button">
-                      Register Now!
+                      Enquire
                     </button>
                   </Link>
                 </div>
               </Col>
+              ))}
             </Row>
           </Col>
         </Row>
@@ -123,5 +138,17 @@ const Login: NextPage = () => {
     </div>
   )
 }
+
+type Props = { result: LoginQuery }
+
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
+  // retrieving the list of all articles
+  const result = await datocms(LoginDocument)
+
+  return {
+    props: { result },
+  }
+}
+
 
 export default Login
