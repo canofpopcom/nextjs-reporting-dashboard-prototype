@@ -40,10 +40,12 @@ Chart.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement
 const random = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min)
 
 /* Get Graph */
-import { LoginDocument, LoginQuery, ClientsDocument, ClientsQuery } from 'graphql/generated'
+import { ClientsDocument, ClientsQuery } from '../../graphql/generated'
 import { datocms } from '../lib/datocms'
 
-const Home: NextPage<props> = ({ result }) => (
+type Props = { result: ClientsQuery }
+
+const Home: NextPage<Props> = ({ result }) => (
 
   <AdminLayout>
     <div className="row mt-2 mb-4 pt-6">
@@ -51,14 +53,18 @@ const Home: NextPage<props> = ({ result }) => (
         <h1 className="fw-semibold text-uppercase">
           WELCOME TO THE
           <br />
-          {result.clients.allClients[0].clientName}
-          <span className="fw-normal">ACCOUNT IQ</span>
+          {result.allClients[0].clientName}
+          <span className="fw-normal"> ACCOUNT IQ </span>
           HUB
         </h1>
       </div>
-      <div className="col-sm-0 col-lg-1 col-md-3">---</div>
+      <div className="col-sm-0 col-lg-1 col-md-3"></div>
       <div className="col-sm-6 col-lg-3 mb-8 card pt-3 pb-2">
-        <DatoImage data={result.clients.allClients[0].clientLogo.responsiveImage} />
+        {result.allClients.map((client) => (
+          <div key={client.id}>
+          {client.clientLogo?.responsiveImage && <DatoImage data={client.clientLogo.responsiveImage} />}
+          </div>
+        ))}
       </div>
     </div>
 
@@ -633,7 +639,7 @@ const Home: NextPage<props> = ({ result }) => (
           <Card.Body>
             <div className="row text-center">
               <div className="col">
-              <a className="twitter-timeline" data-width="auto" data-height="500" data-theme="light" href={result.clients.allClients[0].url}>Tweets by {result.clients.allClients[0].clientName}</a> 
+              <a className="twitter-timeline" data-width="auto" data-height="500" data-theme="light" href={result.allClients[0].url}>Tweets by {result.allClients[0].clientName}</a>
               <script async src="https://platform.twitter.com/widgets.js"></script>
               </div>
             </div>
@@ -1282,16 +1288,11 @@ const Home: NextPage<props> = ({ result }) => (
   </AdminLayout>
 )
 
-export const getStaticProps: GetStaticProps<props> = async () => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
   // retrieving the list of all articles
-  const loginData = await datocms(LoginDocument)
-  const clientData = await datocms(ClientsDocument)
-
-  const result = { logins: loginData, clients: clientData }
-
+  const result = await datocms(ClientsDocument)
   return {
     props: { result },
   }
 }
-
 export default Home
