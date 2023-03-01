@@ -31,7 +31,7 @@ export default function Sidebar(props: { isShow: boolean; isShowMd: boolean }) {
         show: isShow,
         'md-hide': !isShowMd,
       })}
-      style={{backgroundColor: '#62165C' }}
+      style={{ backgroundColor: '#62165C' }}
       id="sidebar"
     >
       <div className="sidebar-brand d-none d-md-flex align-items-center justify-content-center">

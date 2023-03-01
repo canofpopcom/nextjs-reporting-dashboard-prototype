@@ -16,6 +16,8 @@ import Image from 'next/image'
 import { LoginDocument, LoginQuery } from '../../graphql/generated'
 import { datocms } from '../lib/datocms'
 
+type Props = { result: LoginQuery }
+
 const Login: NextPage<Props> = ({ result }) => {
   const router = useRouter()
   const [submitting, setSubmitting] = useState(false)
@@ -48,11 +50,11 @@ const Login: NextPage<Props> = ({ result }) => {
       <Container>
         <Row className="justify-content-center align-items-center px-3">
           <Col lg={8}>
-            <Row>
+            <Row id="Box">
               <Col md={7} className="bg-white border p-5">
                 <div className="">
                   <h1>Login</h1>
-                  <p className="text-black-50">Sign In to your account</p>
+                  <p className="text-black-50">Sign in to Account IQ</p>
 
                   <form onSubmit={login}>
                     <InputGroup className="mb-3">
@@ -71,7 +73,6 @@ const Login: NextPage<Props> = ({ result }) => {
                         defaultValue="Username"
                       />
                     </InputGroup>
-
                     <InputGroup className="mb-3">
                       <InputGroup.Text>
                         <FontAwesomeIcon
@@ -104,20 +105,19 @@ const Login: NextPage<Props> = ({ result }) => {
                   </form>
                 </div>
               </Col>
-
-              {result.allLogins.map((Login) => (
-              <Col md={5} className="bg-primary text-white d-flex align-items-center justify-content-center p-5" style={{backgroundColor: Login.brandColour?.hex}}>
-                <div key={Login.id} className="text-center"><Image width={200} height={50} src={Login.brandLogo.url} /> <h2>{Login.loginTitle}</h2>
-                  <p>
-                    {Login.loginIntro}
-                  </p>
-                  <Link href="/register">
-                    <button className="btn btn-lg btn-outline-light mt-3" type="button">
-                      Enquire
-                    </button>
-                  </Link>
-                </div>
-              </Col>
+              {result.allLogins.map((LoginDisp) => (
+                <Col key={LoginDisp.id} md={5} className="bg-primary text-white d-flex align-items-center justify-content-center p-5" style={{ backgroundColor: LoginDisp?.brandColour?.hex || 'grey' }}>
+                  <div key={LoginDisp.id} className="text-center">
+                    <Image width={200} height={50} src={LoginDisp?.brandLogo?.url || ''} alt={LoginDisp?.brandLogo?.alt || 'Hotwire'} />
+                    <h2>{LoginDisp?.loginTitle || ''}</h2>
+                    {LoginDisp.loginIntro}
+                    <Link href="/register">
+                      <button className="btn btn-lg btn-outline-light mt-3" type="button">
+                        Setup Account
+                      </button>
+                    </Link>
+                  </div>
+                </Col>
               ))}
             </Row>
           </Col>
@@ -127,9 +127,7 @@ const Login: NextPage<Props> = ({ result }) => {
   )
 }
 
-type Props = { result: LoginQuery }
-
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   // retrieving the list of all articles
   const result = await datocms(LoginDocument)
 

@@ -13,10 +13,7 @@ import {
   faChevronUp, faCode,
   faDroplet,
   faGauge,
-  faLayerGroup,
-  faLocationArrow,
   faPencil,
-  faPuzzlePiece,
   faRightToBracket,
 } from '@fortawesome/free-solid-svg-icons'
 import React, {

@@ -18,7 +18,6 @@ type Props = {
 }
 
 const Pokemons: NextPage<Props> = (props) => {
-  
   const {
     pokemonResource, page, perPage, sort, order,
   } = props

@@ -34,15 +34,13 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 import React from 'react'
 import { Image as DatoImage } from 'react-datocms'
-
-Chart.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Tooltip, Filler)
-
-const random = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min)
-
 /* Get Graph */
 import { ClientsDocument, ClientsQuery } from '../../graphql/generated'
 import { datocms } from '../lib/datocms'
 
+Chart.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Tooltip, Filler)
+
+const random = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min)
 type Props = { result: ClientsQuery }
 
 const Home: NextPage<Props> = ({ result }) => (
@@ -58,11 +56,11 @@ const Home: NextPage<Props> = ({ result }) => (
           HUB
         </h1>
       </div>
-      <div className="col-sm-0 col-lg-1 col-md-3"></div>
       <div className="col-sm-6 col-lg-3 mb-8 card pt-3 pb-2">
         {result.allClients.map((client) => (
           <div key={client.id}>
-          {client.clientLogo?.responsiveImage && <DatoImage data={client.clientLogo.responsiveImage} />}
+            {client.clientLogo?.responsiveImage
+            && <DatoImage data={client.clientLogo.responsiveImage} />}
           </div>
         ))}
       </div>
@@ -639,8 +637,11 @@ const Home: NextPage<Props> = ({ result }) => (
           <Card.Body>
             <div className="row text-center">
               <div className="col">
-              <a className="twitter-timeline" data-width="auto" data-height="500" data-theme="light" href={result.allClients[0].url}>Tweets by {result.allClients[0].clientName}</a>
-              <script async src="https://platform.twitter.com/widgets.js"></script>
+                <a className="twitter-timeline" data-width="auto" data-height="500" data-theme="light" href={result.allClients[0].url || ''}>
+                  Tweets by
+                  {result.allClients[0].clientName || '' }
+                </a>
+                <script async src="https://platform.twitter.com/widgets.js"> </script>
               </div>
             </div>
           </Card.Body>
@@ -1263,7 +1264,7 @@ const Home: NextPage<Props> = ({ result }) => (
                           className="btn-link rounded-0 text-black-50 shadow-none p-0"
                           id="action-user1"
                         >
-                        <FontAwesomeIcon fixedWidth icon={faEllipsisVertical} />
+                          <FontAwesomeIcon fixedWidth icon={faEllipsisVertical} />
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                           <Dropdown.Item href="#/action-1">Info</Dropdown.Item>
@@ -1288,7 +1289,7 @@ const Home: NextPage<Props> = ({ result }) => (
   </AdminLayout>
 )
 
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   // retrieving the list of all articles
   const result = await datocms(ClientsDocument)
   return {
