@@ -13,12 +13,10 @@ import axios from 'axios'
 import { deleteCookie, getCookie } from 'cookies-next'
 
 import Image from 'next/image'
-import { Image as DatoImage } from 'react-datocms'
 import { LoginDocument, LoginQuery } from '../../graphql/generated'
 import { datocms } from '../lib/datocms'
 
 const Login: NextPage<Props> = ({ result }) => {
-
   const router = useRouter()
   const [submitting, setSubmitting] = useState(false)
 
@@ -33,7 +31,6 @@ const Login: NextPage<Props> = ({ result }) => {
   }
 
   const login = async (e: SyntheticEvent) => {
-
     e.stopPropagation()
     e.preventDefault()
 
@@ -109,17 +106,8 @@ const Login: NextPage<Props> = ({ result }) => {
               </Col>
 
               {result.allLogins.map((Login) => (
-              <Col
-                md={5}
-                className="bg-primary text-white d-flex align-items-center justify-content-center p-5"
-                style={{backgroundColor: Login.brandColour?.hex}}
-              >
-                <div key={Login.id} className="text-center">
-                 <Image 
-                  width={200}
-                  height={50}
-                  src={Login.brandLogo.url} />
-                  <h2>{Login.loginTitle}</h2>
+              <Col md={5} className="bg-primary text-white d-flex align-items-center justify-content-center p-5" style={{backgroundColor: Login.brandColour?.hex}}>
+                <div key={Login.id} className="text-center"><Image width={200} height={50} src={Login.brandLogo.url} /> <h2>{Login.loginTitle}</h2>
                   <p>
                     {Login.loginIntro}
                   </p>
@@ -149,6 +137,5 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     props: { result },
   }
 }
-
 
 export default Login

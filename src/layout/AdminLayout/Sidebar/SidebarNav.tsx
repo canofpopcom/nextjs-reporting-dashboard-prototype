@@ -38,7 +38,6 @@ const SidebarNavItem = (props: SidebarNavItemProps) => {
     icon,
     children,
     href,
-    logo
   } = props
 
   return (

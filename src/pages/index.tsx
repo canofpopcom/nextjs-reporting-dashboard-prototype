@@ -28,16 +28,12 @@ import {
   Tooltip,
 } from 'chart.js'
 import {
-  faCcAmex,
-  faCcApplePay,
-  faCcPaypal,
-  faCcStripe,
-  faCcVisa,
   faFacebookF,
   faLinkedinIn,
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons'
 import React from 'react'
+import { Image as DatoImage } from 'react-datocms'
 
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Tooltip, Filler)
 
@@ -46,23 +42,25 @@ const random = (min: number, max: number) => Math.floor(Math.random() * (max - m
 /* Get Graph */
 import { LoginDocument, LoginQuery, ClientsDocument, ClientsQuery } from 'graphql/generated'
 import { datocms } from '../lib/datocms'
-import { Image as DatoImage } from 'react-datocms'
 
-const Home: NextPage<Props> = ({ result }) => (
+const Home: NextPage<props> = ({ result }) => (
 
-  <AdminLayout cmsData={result}>
-    
+  <AdminLayout>
     <div className="row mt-2 mb-4 pt-6">
       <div className="col-sm-8 col-lg-8 mb-8 ">
-        <h1 className="fw-semibold text-uppercase">WELCOME TO THE <br/>{result.clients.allClients[0].clientName} <span className="fw-normal">ACCOUNT IQ</span> HUB</h1>
+        <h1 className="fw-semibold text-uppercase">
+          WELCOME TO THE
+          <br />
+          {result.clients.allClients[0].clientName}
+          <span className="fw-normal">ACCOUNT IQ</span>
+          HUB
+        </h1>
       </div>
-      <div className="col-sm-0 col-lg-1 col-md-3">
-      </div>
+      <div className="col-sm-0 col-lg-1 col-md-3">---</div>
       <div className="col-sm-6 col-lg-3 mb-8 card pt-3 pb-2">
-      <DatoImage data={result.clients.allClients[0].clientLogo.responsiveImage} />
+        <DatoImage data={result.clients.allClients[0].clientLogo.responsiveImage} />
       </div>
     </div>
-
 
     <div className="row">
 
@@ -1284,7 +1282,7 @@ const Home: NextPage<Props> = ({ result }) => (
   </AdminLayout>
 )
 
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
+export const getStaticProps: GetStaticProps<props> = async () => {
   // retrieving the list of all articles
   const loginData = await datocms(LoginDocument)
   const clientData = await datocms(ClientsDocument)

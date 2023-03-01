@@ -6,8 +6,6 @@ import HeaderFeaturedNav from '@layout/AdminLayout/Header/HeaderFeaturedNav'
 import HeaderNotificationNav from '@layout/AdminLayout/Header/HeaderNotificationNav'
 import HeaderProfileNav from '@layout/AdminLayout/Header/HeaderProfileNav'
 import { Button, Container } from 'react-bootstrap'
-/* Image Support */
-import Image from 'next/image'
 
 type HeaderProps = {
   toggleSidebar: () => void;
@@ -15,31 +13,18 @@ type HeaderProps = {
 }
 
 export default function Header(props: HeaderProps) {
-  const { toggleSidebar, toggleSidebarMd, clients } = props
-  
-  //console.log('all clients', clients)
+  const { toggleSidebar, toggleSidebarMd} = props
 
-  const currentClient = clients.allClients[0]
-
-  //console.log(' current client', currentClient)
+  // const currentClient = clients.allClients[0]
+  // console.log(' current client', currentClient);
 
   return (
     <header className="header sticky-top mb-4 p-2 border-bottom">
       <Container fluid className="header-navbar d-flex align-items-center">
-        <Button
-          variant="link"
-          className="header-toggler d-md-none px-md-0 me-md-3 rounded-0 shadow-none"
-          type="button"
-          onClick={toggleSidebar}
-        >
-          <FontAwesomeIcon icon={faBars} />
+        <Button variant="link" className="header-toggler d-md-none px-md-0 me-md-3 rounded-0 shadow-none" type="button" onClick={toggleSidebar}>
+          <FontAwesomeIcon icon={faBars}/>
         </Button>
-        <Button
-          variant="link"
-          className="header-toggler d-none d-md-inline-block px-md-0 me-md-3 rounded-0 shadow-none"
-          type="button"
-          onClick={toggleSidebarMd}
-        >
+        <Button variant="link" className="header-toggler d-none d-md-inline-block px-md-0 me-md-3 rounded-0 shadow-none" type="button" onClick={toggleSidebarMd} >
           <FontAwesomeIcon icon={faBars} />
         </Button>
         <Link href="/" className="header-brand d-md-none">
