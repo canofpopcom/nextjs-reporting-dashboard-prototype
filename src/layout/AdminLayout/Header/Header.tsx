@@ -6,6 +6,8 @@ import HeaderFeaturedNav from '@layout/AdminLayout/Header/HeaderFeaturedNav'
 import HeaderNotificationNav from '@layout/AdminLayout/Header/HeaderNotificationNav'
 import HeaderProfileNav from '@layout/AdminLayout/Header/HeaderProfileNav'
 import { Button, Container } from 'react-bootstrap'
+/* Image Support */
+import Image from 'next/image'
 
 type HeaderProps = {
   toggleSidebar: () => void;
@@ -13,7 +15,13 @@ type HeaderProps = {
 }
 
 export default function Header(props: HeaderProps) {
-  const { toggleSidebar, toggleSidebarMd } = props
+  const { toggleSidebar, toggleSidebarMd, clients } = props
+  
+  //console.log('all clients', clients)
+
+  const currentClient = clients.allClients[0]
+
+  //console.log(' current client', currentClient)
 
   return (
     <header className="header sticky-top mb-4 p-2 border-bottom">
@@ -36,7 +44,7 @@ export default function Header(props: HeaderProps) {
         </Button>
         <Link href="/" className="header-brand d-md-none">
           <svg width="118" height="46">
-            <title>CoreUI Logo</title>
+            <title>HW Logo</title>
             <use xlinkHref="/assets/brand/coreui.svg#full" />
           </svg>
         </Link>

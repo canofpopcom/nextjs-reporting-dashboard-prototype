@@ -1,5 +1,6 @@
-import type { NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 import Image from 'next/image'
+
 import { AdminLayout } from '@layout'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -42,10 +43,31 @@ Chart.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement
 
 const random = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min)
 
-const Home: NextPage = () => (
-  <AdminLayout>
+/* Get Graph */
+import { LoginDocument, LoginQuery, ClientsDocument, ClientsQuery } from 'graphql/generated'
+import { datocms } from '../lib/datocms'
+import { Image as DatoImage } from 'react-datocms'
+
+const Home: NextPage<Props> = ({ result }) => (
+
+  <AdminLayout cmsData={result}>
+    
+    <div className="row mt-2 mb-4 pt-6">
+      <div className="col-sm-8 col-lg-8 mb-8 ">
+        <h1 className="fw-semibold text-uppercase">WELCOME TO THE <br/>{result.clients.allClients[0].clientName} <span className="fw-normal">ACCOUNT IQ</span> HUB</h1>
+      </div>
+      <div className="col-sm-0 col-lg-1 col-md-3">
+      </div>
+      <div className="col-sm-6 col-lg-3 mb-8 card pt-3 pb-2">
+      <DatoImage data={result.clients.allClients[0].clientLogo.responsiveImage} />
+      </div>
+    </div>
+
+
     <div className="row">
+
       <div className="col-sm-6 col-lg-3">
+
         <Card bg="primary" text="white" className="mb-4">
           <Card.Body className="pb-0 d-flex justify-content-between align-items-start">
             <div>
@@ -57,7 +79,7 @@ const Home: NextPage = () => (
                   )
                 </span>
               </div>
-              <div>Users</div>
+              <div>Data Point</div>
             </div>
             <Dropdown align="end">
               <Dropdown.Toggle
@@ -145,7 +167,7 @@ const Home: NextPage = () => (
                   )
                 </span>
               </div>
-              <div>Income</div>
+              <div>Data Point</div>
             </div>
             <Dropdown align="end">
               <Dropdown.Toggle
@@ -378,7 +400,7 @@ const Home: NextPage = () => (
         <div className="d-flex justify-content-between">
           <div>
             <h4 className="mb-0">Traffic</h4>
-            <div className="small text-black-50">January - July 2021</div>
+            <div className="small text-black-50">January - March 2023</div>
           </div>
           <div className="d-none d-md-block">
             <ButtonGroup aria-label="Toolbar with buttons" className="mx-3">
@@ -600,13 +622,21 @@ const Home: NextPage = () => (
           <Card.Body>
             <div className="row text-center">
               <div className="col">
-                <div className="fs-5 fw-semibold">973k</div>
+                <div className="fs-5 fw-semibold">65.9k</div>
                 <div className="text-uppercase text-black-50 small">followers</div>
               </div>
               <div className="vr p-0" />
               <div className="col">
                 <div className="fs-5 fw-semibold">1.792</div>
                 <div className="text-uppercase text-black-50 small">tweets</div>
+              </div>
+            </div>
+          </Card.Body>
+          <Card.Body>
+            <div className="row text-center">
+              <div className="col">
+              <a className="twitter-timeline" data-width="auto" data-height="500" data-theme="light" href={result.clients.allClients[0].url}>Tweets by {result.clients.allClients[0].clientName}</a> 
+              <script async src="https://platform.twitter.com/widgets.js"></script>
               </div>
             </div>
           </Card.Body>
@@ -648,7 +678,7 @@ const Home: NextPage = () => (
       <div className="col-md-12">
         <Card className="mb-4">
           <Card.Header>
-            Traffic &amp; Sales
+            <strong>Account List Overview</strong>
           </Card.Header>
           <Card.Body>
             <div className="row">
@@ -662,7 +692,6 @@ const Home: NextPage = () => (
                       <div className="fs-5 fw-semibold">9,123</div>
                     </div>
                   </div>
-
                   <div className="col-6">
                     <div className="border-start border-4 border-danger px-3 mb-3">
                       <small className="text-black-50">
@@ -948,14 +977,17 @@ const Home: NextPage = () => (
                     <th className="text-center">
                       <FontAwesomeIcon icon={faUsers} fixedWidth />
                     </th>
-                    <th>User</th>
-                    <th>Usage</th>
-                    <th className="text-center">Payment Method</th>
-                    <th>Activity</th>
+                    <th>Name</th>
+                    <th>Account</th>
+                    <th>Location</th>
+                    <th>Notes</th>
+                    <th>Outreach activity</th>
+                    <th>Date Added</th>
                     <th aria-label="Action" />
                   </tr>
                 </thead>
                 <tbody>
+                  {/* <!-- Person --> */}
                   <tr className="align-middle">
                     <td className="text-center">
                       <div className="avatar avatar-md d-inline-flex position-relative">
@@ -971,12 +1003,21 @@ const Home: NextPage = () => (
                       </div>
                     </td>
                     <td>
-                      <div>Yiorgos Avraamu</div>
+                      <div>First / Last Name</div>
                       <div className="small text-black-50">
-                        <span>New</span>
+                        <span>Job Title and Company</span>
                         {' '}
-                        | Registered: Jan 1, 2020
+                        | Added: Jan 1, 2022
                       </div>
+                    </td>
+                    <td>
+                      <div className="text-black-50">Account Name</div>
+                    </td>
+                    <td>
+                      <small className="text-black-50">Town, Name, Country</small>
+                    </td>
+                    <td className="text-left">
+                      <div className="text-black-50">Notes</div>
                     </td>
                     <td>
                       <div className="clearfix">
@@ -985,18 +1026,14 @@ const Home: NextPage = () => (
                         </div>
                         <div className="float-end">
                           <small className="text-black-50">
-                            Jun 11, 2020 - Jul 10, 2020
+                            Activity Level
                           </small>
                         </div>
                       </div>
                       <ProgressBar className="progress-thin" variant="success" now={50} />
                     </td>
-                    <td className="text-center">
-                      <FontAwesomeIcon icon={faCcAmex} size="lg" fixedWidth />
-                    </td>
                     <td>
-                      <div className="small text-black-50">Last login</div>
-                      <div className="fw-semibold">10 sec ago</div>
+                      <div className="small text-black-50">01/02/22</div>
                     </td>
                     <td>
                       <Dropdown align="end">
@@ -1022,211 +1059,14 @@ const Home: NextPage = () => (
                       </Dropdown>
                     </td>
                   </tr>
+                  {/* <!-- Person --> */}
                   <tr className="align-middle">
                     <td className="text-center">
                       <div className="avatar avatar-md d-inline-flex position-relative">
                         <Image
                           fill
                           className="rounded-circle"
-                          src="/assets/img/avatars/2.jpg"
-                          alt="user@email.com"
-                        />
-                        <span
-                          className="avatar-status position-absolute d-block bottom-0 end-0 bg-danger rounded-circle border border-white"
-                        />
-                      </div>
-                    </td>
-                    <td>
-                      <div>Avram Tarasios</div>
-                      <div className="small text-black-50">
-                        <span>Recurring</span>
-                        {' '}
-                        | Registered: Jan 1, 2020
-                      </div>
-                    </td>
-                    <td>
-                      <div className="clearfix">
-                        <div className="float-start">
-                          <div className="fw-semibold">10%</div>
-                        </div>
-                        <div className="float-end">
-                          <small className="text-black-50">
-                            Jun 11, 2020 - Jul 10, 2020
-                          </small>
-                        </div>
-                      </div>
-                      <ProgressBar className="progress-thin" variant="info" now={10} />
-                    </td>
-                    <td className="text-center">
-                      <FontAwesomeIcon icon={faCcVisa} size="lg" fixedWidth />
-                    </td>
-                    <td>
-                      <div className="small text-black-50">Last login</div>
-                      <div className="fw-semibold">5 minutes ago</div>
-                    </td>
-                    <td>
-                      <Dropdown align="end">
-                        <Dropdown.Toggle
-                          as="button"
-                          bsPrefix="btn"
-                          className="btn-link rounded-0 text-black-50 shadow-none p-0"
-                          id="action-user2"
-                        >
-                          <FontAwesomeIcon fixedWidth icon={faEllipsisVertical} />
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                          <Dropdown.Item href="#/action-1">Info</Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
-                          <Dropdown.Item
-                            className="text-danger"
-                            href="#/action-3"
-                          >
-                            Delete
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </td>
-                  </tr>
-                  <tr className="align-middle">
-                    <td className="text-center">
-                      <div className="avatar avatar-md d-inline-flex position-relative">
-                        <Image
-                          fill
-                          className="rounded-circle"
-                          src="/assets/img/avatars/3.jpg"
-                          alt="user@email.com"
-                        />
-                        <span
-                          className="avatar-status position-absolute d-block bottom-0 end-0 bg-warning rounded-circle border border-white"
-                        />
-                      </div>
-                    </td>
-                    <td>
-                      <div>Quintin Ed</div>
-                      <div className="small text-black-50">
-                        <span>New</span>
-                        {' '}
-                        | Registered: Jan 1, 2020
-                      </div>
-                    </td>
-                    <td>
-                      <div className="clearfix">
-                        <div className="float-start">
-                          <div className="fw-semibold">74%</div>
-                        </div>
-                        <div className="float-end">
-                          <small className="text-black-50">
-                            Jun 11, 2020 - Jul 10, 2020
-                          </small>
-                        </div>
-                      </div>
-                      <ProgressBar className="progress-thin" variant="warning" now={74} />
-                    </td>
-                    <td className="text-center">
-                      <FontAwesomeIcon icon={faCcStripe} size="lg" fixedWidth />
-                    </td>
-                    <td>
-                      <div className="small text-black-50">Last login</div>
-                      <div className="fw-semibold">1 hour ago</div>
-                    </td>
-                    <td>
-                      <Dropdown align="end">
-                        <Dropdown.Toggle
-                          as="button"
-                          bsPrefix="btn"
-                          className="btn-link rounded-0 text-black-50 shadow-none p-0"
-                          id="action-user3"
-                        >
-                          <FontAwesomeIcon fixedWidth icon={faEllipsisVertical} />
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                          <Dropdown.Item href="#/action-1">Info</Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
-                          <Dropdown.Item
-                            className="text-danger"
-                            href="#/action-3"
-                          >
-                            Delete
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </td>
-                  </tr>
-                  <tr className="align-middle">
-                    <td className="text-center">
-                      <div className="avatar avatar-md d-inline-flex position-relative">
-                        <Image
-                          fill
-                          className="rounded-circle"
-                          src="/assets/img/avatars/4.jpg"
-                          alt="user@email.com"
-                        />
-                        <span
-                          className="avatar-status position-absolute d-block bottom-0 end-0 bg-secondary rounded-circle border border-white"
-                        />
-                      </div>
-                    </td>
-                    <td>
-                      <div>Enéas Kwadwo</div>
-                      <div className="small text-black-50">
-                        <span>New</span>
-                        {' '}
-                        | Registered: Jan 1, 2020
-                      </div>
-                    </td>
-                    <td>
-                      <div className="clearfix">
-                        <div className="float-start">
-                          <div className="fw-semibold">98%</div>
-                        </div>
-                        <div className="float-end">
-                          <small className="text-black-50">
-                            Jun 11, 2020 - Jul 10, 2020
-                          </small>
-                        </div>
-                      </div>
-                      <ProgressBar className="progress-thin" variant="danger" now={98} />
-                    </td>
-                    <td className="text-center">
-                      <FontAwesomeIcon icon={faCcPaypal} size="lg" fixedWidth />
-                    </td>
-                    <td>
-                      <div className="small text-black-50">Last login</div>
-                      <div className="fw-semibold">Last month</div>
-                    </td>
-                    <td>
-                      <Dropdown align="end">
-                        <Dropdown.Toggle
-                          as="button"
-                          bsPrefix="btn"
-                          className="btn-link rounded-0 text-black-50 shadow-none p-0"
-                          id="action-user4"
-                        >
-                          <FontAwesomeIcon fixedWidth icon={faEllipsisVertical} />
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                          <Dropdown.Item href="#/action-1">Info</Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
-                          <Dropdown.Item
-                            className="text-danger"
-                            href="#/action-3"
-                          >
-                            Delete
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </td>
-                  </tr>
-                  <tr className="align-middle">
-                    <td className="text-center">
-                      <div className="avatar avatar-md d-inline-flex position-relative">
-                        <Image
-                          fill
-                          className="rounded-circle"
-                          src="/assets/img/avatars/5.jpg"
+                          src="/assets/img/avatars/1.jpg"
                           alt="user@email.com"
                         />
                         <span
@@ -1235,32 +1075,37 @@ const Home: NextPage = () => (
                       </div>
                     </td>
                     <td>
-                      <div>Agapetus Tadeáš</div>
+                      <div>First / Last Name</div>
                       <div className="small text-black-50">
-                        <span>New</span>
+                        <span>Job Title and Company</span>
                         {' '}
-                        | Registered: Jan 1, 2020
+                        | Added: Jan 1, 2022
                       </div>
+                    </td>
+                    <td>
+                      <div className="text-black-50">Account Name</div>
+                    </td>
+                    <td>
+                      <small className="text-black-50">Town, Name, Country</small>
+                    </td>
+                    <td className="text-left">
+                      <div className="text-black-50">Notes</div>
                     </td>
                     <td>
                       <div className="clearfix">
                         <div className="float-start">
-                          <div className="fw-semibold">22%</div>
+                          <div className="fw-semibold">50%</div>
                         </div>
                         <div className="float-end">
                           <small className="text-black-50">
-                            Jun 11, 2020 - Jul 10, 2020
+                            Activity Level
                           </small>
                         </div>
                       </div>
-                      <ProgressBar className="progress-thin" variant="info" now={22} />
-                    </td>
-                    <td className="text-center">
-                      <FontAwesomeIcon icon={faCcApplePay} size="lg" fixedWidth />
+                      <ProgressBar className="progress-thin" variant="success" now={50} />
                     </td>
                     <td>
-                      <div className="small text-black-50">Last login</div>
-                      <div className="fw-semibold">Last week</div>
+                      <div className="small text-black-50">01/02/22</div>
                     </td>
                     <td>
                       <Dropdown align="end">
@@ -1268,7 +1113,7 @@ const Home: NextPage = () => (
                           as="button"
                           bsPrefix="btn"
                           className="btn-link rounded-0 text-black-50 shadow-none p-0"
-                          id="action-user5"
+                          id="action-user1"
                         >
                           <FontAwesomeIcon fixedWidth icon={faEllipsisVertical} />
                         </Dropdown.Toggle>
@@ -1286,47 +1131,53 @@ const Home: NextPage = () => (
                       </Dropdown>
                     </td>
                   </tr>
+                  {/* <!-- Person --> */}
                   <tr className="align-middle">
                     <td className="text-center">
                       <div className="avatar avatar-md d-inline-flex position-relative">
                         <Image
                           fill
                           className="rounded-circle"
-                          src="/assets/img/avatars/6.jpg"
+                          src="/assets/img/avatars/1.jpg"
                           alt="user@email.com"
                         />
                         <span
-                          className="avatar-status position-absolute d-block bottom-0 end-0 bg-danger rounded-circle border border-white"
+                          className="avatar-status position-absolute d-block bottom-0 end-0 bg-success rounded-circle border border-white"
                         />
                       </div>
                     </td>
                     <td>
-                      <div>Friderik Dávid</div>
+                      <div>First / Last Name</div>
                       <div className="small text-black-50">
-                        <span>New</span>
+                        <span>Job Title and Company</span>
                         {' '}
-                        | Registered: Jan 1, 2020
+                        | Added: Jan 1, 2022
                       </div>
+                    </td>
+                    <td>
+                      <div className="text-black-50">Account Name</div>
+                    </td>
+                    <td>
+                      <small className="text-black-50">Town, Name, Country</small>
+                    </td>
+                    <td className="text-left">
+                      <div className="text-black-50">Notes</div>
                     </td>
                     <td>
                       <div className="clearfix">
                         <div className="float-start">
-                          <div className="fw-semibold">43%</div>
+                          <div className="fw-semibold">50%</div>
                         </div>
                         <div className="float-end">
                           <small className="text-black-50">
-                            Jun 11, 2020 - Jul 10, 2020
+                            Activity Level
                           </small>
                         </div>
                       </div>
-                      <ProgressBar className="progress-thin" variant="success" now={43} />
-                    </td>
-                    <td className="text-center">
-                      <FontAwesomeIcon icon={faCcAmex} size="lg" fixedWidth />
+                      <ProgressBar className="progress-thin" variant="success" now={50} />
                     </td>
                     <td>
-                      <div className="small text-black-50">Last login</div>
-                      <div className="fw-semibold">Yesterday</div>
+                      <div className="small text-black-50">01/02/22</div>
                     </td>
                     <td>
                       <Dropdown align="end">
@@ -1334,11 +1185,82 @@ const Home: NextPage = () => (
                           as="button"
                           bsPrefix="btn"
                           className="btn-link rounded-0 text-black-50 shadow-none p-0"
-                          id="action-user6"
+                          id="action-user1"
                         >
                           <FontAwesomeIcon fixedWidth icon={faEllipsisVertical} />
                         </Dropdown.Toggle>
 
+                        <Dropdown.Menu>
+                          <Dropdown.Item href="#/action-1">Info</Dropdown.Item>
+                          <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
+                          <Dropdown.Item
+                            className="text-danger"
+                            href="#/action-3"
+                          >
+                            Delete
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </td>
+                  </tr>
+                  {/* <!-- Person --> */}
+                  <tr className="align-middle">
+                    <td className="text-center">
+                      <div className="avatar avatar-md d-inline-flex position-relative">
+                        <Image
+                          fill
+                          className="rounded-circle"
+                          src="/assets/img/avatars/1.jpg"
+                          alt="user@email.com"
+                        />
+                        <span
+                          className="avatar-status position-absolute d-block bottom-0 end-0 bg-success rounded-circle border border-white"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div>First / Last Name</div>
+                      <div className="small text-black-50">
+                        <span>Job Title and Company</span>
+                        {' '}
+                        | Added: Jan 1, 2022
+                      </div>
+                    </td>
+                    <td>
+                      <div className="text-black-50">Account Name</div>
+                    </td>
+                    <td>
+                      <small className="text-black-50">Town, Name, Country</small>
+                    </td>
+                    <td className="text-left">
+                      <div className="text-black-50">Notes</div>
+                    </td>
+                    <td>
+                      <div className="clearfix">
+                        <div className="float-start">
+                          <div className="fw-semibold">50%</div>
+                        </div>
+                        <div className="float-end">
+                          <small className="text-black-50">
+                            Activity Level
+                          </small>
+                        </div>
+                      </div>
+                      <ProgressBar className="progress-thin" variant="success" now={50} />
+                    </td>
+                    <td>
+                      <div className="small text-black-50">01/02/22</div>
+                    </td>
+                    <td>
+                      <Dropdown align="end">
+                        <Dropdown.Toggle
+                          as="button"
+                          bsPrefix="btn"
+                          className="btn-link rounded-0 text-black-50 shadow-none p-0"
+                          id="action-user1"
+                        >
+                        <FontAwesomeIcon fixedWidth icon={faEllipsisVertical} />
+                        </Dropdown.Toggle>
                         <Dropdown.Menu>
                           <Dropdown.Item href="#/action-1">Info</Dropdown.Item>
                           <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
@@ -1361,5 +1283,17 @@ const Home: NextPage = () => (
     </div>
   </AdminLayout>
 )
+
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
+  // retrieving the list of all articles
+  const loginData = await datocms(LoginDocument)
+  const clientData = await datocms(ClientsDocument)
+
+  const result = { logins: loginData, clients: clientData }
+
+  return {
+    props: { result },
+  }
+}
 
 export default Home

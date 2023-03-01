@@ -1,0 +1,19 @@
+query Login {
+  allLogins {
+    id
+    loginTitle
+    loginIntro
+    brandColour{
+      alpha
+      blue
+      green
+      hex
+      red
+    }
+    _createdAt
+    _publishedAt
+    brandLogo {
+      url
+    }
+  }
+}

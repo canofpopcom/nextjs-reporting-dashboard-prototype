@@ -1,0 +1,11 @@
+query Home {
+  allArticles {
+    id
+    title
+    _createdAt
+    _publishedAt
+    image {
+      url
+    }
+  }
+}

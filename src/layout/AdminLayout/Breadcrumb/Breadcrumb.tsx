@@ -7,15 +7,16 @@ export default function Breadcrumb() {
         linkProps={{ className: 'text-decoration-none' }}
         href="/"
       >
-        Home
+        Welcome
       </BSBreadcrumb.Item>
       <BSBreadcrumb.Item
         linkProps={{ className: 'text-decoration-none' }}
         href="/"
       >
-        Library
+        News
       </BSBreadcrumb.Item>
-      <BSBreadcrumb.Item active>Data</BSBreadcrumb.Item>
+      <BSBreadcrumb.Item active>Insights</BSBreadcrumb.Item>
+      <BSBreadcrumb.Item active>Resources</BSBreadcrumb.Item>
     </BSBreadcrumb>
   )
 }

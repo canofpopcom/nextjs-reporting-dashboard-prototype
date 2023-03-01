@@ -41,13 +41,13 @@ https://nextjs-dashboard-olive.vercel.app/register
 First, setup the application:
 
 ```bash
-pnpm install
+npm install
 ```
 
 Then, run the development server:
 
 ```bash
-pnpm run dev
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
