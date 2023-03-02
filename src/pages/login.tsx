@@ -110,7 +110,7 @@ const Login: NextPage<Props> = ({ result }) => {
                   <div key={LoginDisp.id} className="text-center">
                     <Image width={200} height={50} src={LoginDisp?.brandLogo?.url || ''} alt={LoginDisp?.brandLogo?.alt || 'Hotwire'} />
                     <h2>{LoginDisp?.loginTitle || ''}</h2>
-                    {LoginDisp.loginIntro}
+                    {LoginDisp?.loginIntro}
                     <Link href="/register">
                       <button className="btn btn-lg btn-outline-light mt-3" type="button">
                         Setup Account
