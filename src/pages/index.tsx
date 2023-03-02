@@ -58,12 +58,10 @@ const Home: NextPage<Props> = ({ result }) => (
         <div className="row" dangerouslySetInnerHTML={{ __html: result.allClients[0].clientIntroSimple || '' }} />
       </div>
       <div className="col-sm-6 col-lg-3 mb-8 pt-2 pb-2">
-        {result.allClients.map((client) => (
-          <div key={client.id}>
-            {client.clientLogo?.responsiveImage
-            && <DatoImage data={client.clientLogo.responsiveImage} />}
-          </div>
-        ))}
+        <div key={result.allClients[0].id}>
+          {result.allClients[0].clientLogo?.responsiveImage
+          && <DatoImage data={result.allClients[0].clientLogo.responsiveImage} />}
+        </div>
       </div>
     </div>
 

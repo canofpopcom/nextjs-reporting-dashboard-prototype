@@ -5,19 +5,20 @@ import Breadcrumb from '@layout/AdminLayout/Breadcrumb/Breadcrumb'
 import HeaderFeaturedNav from '@layout/AdminLayout/Header/HeaderFeaturedNav'
 import HeaderNotificationNav from '@layout/AdminLayout/Header/HeaderNotificationNav'
 import HeaderProfileNav from '@layout/AdminLayout/Header/HeaderProfileNav'
-import { Button, Container } from 'react-bootstrap'
+import { Button, Container, Form } from 'react-bootstrap'
 import Image from 'next/image'
 
 type HeaderProps = {
   toggleSidebar: () => void;
   toggleSidebarMd: () => void;
+  clientNo: number;
+  clientNoSet?: (clientNo: number) => void;
 }
 
 export default function Header(props: HeaderProps) {
-  const { toggleSidebar, toggleSidebarMd } = props
-
-  // const currentClient = clients.allClients[0]
-  // console.log(' current client', currentClient);
+  const {
+    toggleSidebar, toggleSidebarMd, clientNo, clientNoSet,
+  } = props
 
   return (
     <header className="header sticky-top mb-4 p-2 border-bottom">
@@ -34,6 +35,22 @@ export default function Header(props: HeaderProps) {
         </Link>
         <div className="header-nav d-none d-md-flex">
           <HeaderFeaturedNav />
+        </div>
+        <div className="header-nav ms-auto d-none">
+          {' '}
+          <Form.Select
+            defaultValue={clientNo}
+            className="d-inline-block w-auto hidden"
+            aria-label="Item per page"
+            onChange={(event) => {
+              if (clientNoSet) {
+                clientNoSet(parseInt(event.target.value, 10))
+              }
+            }}
+          >
+            <option value={0}>0</option>
+            <option value={1}>1</option>
+          </Form.Select>
         </div>
         <div className="header-nav ms-auto">
           <HeaderNotificationNav />
