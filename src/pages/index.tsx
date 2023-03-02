@@ -1294,6 +1294,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   const result = await datocms(ClientsDocument)
   return {
     props: { result },
+    revalidate: 30, // In second
   }
 }
 export default Home
