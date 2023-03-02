@@ -51,15 +51,15 @@ const Home: NextPage<Props> = ({ result }) => (
         <h1 className="fw-semibold mb-4 text-uppercase">
           WELCOME TO THE
           <br />
-          {result.allClients[0].clientName}
+          {result.allClients[0]?.clientName || ''}
           <span className="fw-normal"> ACCOUNT IQ </span>
           HUB
         </h1>
-        <div className="row" dangerouslySetInnerHTML={{ __html: result.allClients[0].clientIntroSimple || '' }} />
+        <div className="row" dangerouslySetInnerHTML={{ __html: result.allClients[0]?.clientIntroSimple || '' }} />
       </div>
       <div className="col-sm-6 col-lg-3 mb-8 pt-2 pb-2">
-        <div key={result.allClients[0].id}>
-          {result.allClients[0].clientLogo?.responsiveImage
+        <div key={result.allClients[0]?.id}>
+          {result.allClients[0]?.clientLogo?.responsiveImage
           && <DatoImage data={result.allClients[0].clientLogo.responsiveImage} />}
         </div>
       </div>
@@ -636,9 +636,9 @@ const Home: NextPage<Props> = ({ result }) => (
           <Card.Body>
             <div className="row text-center">
               <div className="col">
-                <a className="twitter-timeline" data-width="auto" data-height="500" data-theme="light" href={result.allClients[0].url || ''}>
+                <a className="twitter-timeline" data-width="auto" data-height="500" data-theme="light" href={result.allClients[0]?.url || ''}>
                   Tweets by
-                  {result.allClients[0].clientName || '' }
+                  {result.allClients[0]?.clientName || '' }
                 </a>
                 <script async src="https://platform.twitter.com/widgets.js"> </script>
               </div>
