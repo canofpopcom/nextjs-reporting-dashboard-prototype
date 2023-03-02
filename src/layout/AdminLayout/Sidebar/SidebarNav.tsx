@@ -174,7 +174,7 @@ export default function SidebarNav() {
         <small className="ms-auto"><Badge bg="info">NEW</Badge></small>
       </SidebarNavItem>
 
-      <SidebarNavTitle>Misc</SidebarNavTitle>
+      <SidebarNavTitle>Resources</SidebarNavTitle>
 
       <SidebarNavGroup toggleIcon={faStar} toggleText="Pages">
         <SidebarNavItem icon={faRightToBracket} href="login">Login</SidebarNavItem>

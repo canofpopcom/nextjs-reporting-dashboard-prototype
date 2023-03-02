@@ -33,6 +33,7 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons'
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 import { Image as DatoImage } from 'react-datocms'
 /* Get Graph */
 import { ClientsDocument, ClientsQuery } from '../../graphql/generated'
@@ -47,16 +48,17 @@ const Home: NextPage<Props> = ({ result }) => (
 
   <AdminLayout>
     <div className="row mt-2 mb-4 pt-6">
-      <div className="col-sm-8 col-lg-8 mb-8 ">
-        <h1 className="fw-semibold text-uppercase">
+      <div className="col-sm-10 col-lg-9 mb-8 px-4">
+        <h1 className="fw-semibold mb-4 text-uppercase">
           WELCOME TO THE
           <br />
           {result.allClients[0].clientName}
           <span className="fw-normal"> ACCOUNT IQ </span>
           HUB
         </h1>
+        <div className="row" dangerouslySetInnerHTML={{__html:result.allClients[0].clientIntroSimple}} />
       </div>
-      <div className="col-sm-6 col-lg-3 mb-8 card pt-3 pb-2">
+      <div className="col-sm-6 col-lg-3 mb-8 pt-2 pb-2">
         {result.allClients.map((client) => (
           <div key={client.id}>
             {client.clientLogo?.responsiveImage
