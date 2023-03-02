@@ -13,10 +13,7 @@ import {
   faChevronUp, faCode,
   faDroplet,
   faGauge,
-  faLayerGroup,
-  faLocationArrow,
   faPencil,
-  faPuzzlePiece,
   faRightToBracket,
 } from '@fortawesome/free-solid-svg-icons'
 import React, {
@@ -38,7 +35,6 @@ const SidebarNavItem = (props: SidebarNavItemProps) => {
     icon,
     children,
     href,
-    logo
   } = props
 
   return (
@@ -178,7 +174,7 @@ export default function SidebarNav() {
         <small className="ms-auto"><Badge bg="info">NEW</Badge></small>
       </SidebarNavItem>
 
-      <SidebarNavTitle>Misc</SidebarNavTitle>
+      <SidebarNavTitle>Resources</SidebarNavTitle>
 
       <SidebarNavGroup toggleIcon={faStar} toggleText="Pages">
         <SidebarNavItem icon={faRightToBracket} href="login">Login</SidebarNavItem>

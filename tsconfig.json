@@ -29,7 +29,8 @@
       "@pages": ["src/pages"],
       "@store": ["src/store"],
       "@styles/*": ["src/styles/*"],
-      "@data": ["src/datocms"]
+      "@graphql": ["./graphql/*"],
+      "@datocms/*": ["src/datocms/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

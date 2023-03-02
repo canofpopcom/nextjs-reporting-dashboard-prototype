@@ -1,18 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 import classNames from 'classnames'
 import { Button } from 'react-bootstrap'
 import SidebarNav from './SidebarNav'
 
-import Image from 'next/image'
-
-export default function Sidebar(props: { isShow: boolean; isShowMd: boolean; logins: json }) {
-  
-  const { isShow, isShowMd, logins } = props
-
-  const currentLogin = logins.allLogins[0];
+export default function Sidebar(props: { isShow: boolean; isShowMd: boolean }) {
+  const { isShow, isShowMd } = props
   const [isNarrow, setIsNarrow] = useState(false)
 
   const toggleIsNarrow = () => {
@@ -35,16 +31,11 @@ export default function Sidebar(props: { isShow: boolean; isShowMd: boolean; log
         show: isShow,
         'md-hide': !isShowMd,
       })}
-      style={{backgroundColor: currentLogin.brandColour.hex}}
+      style={{ backgroundColor: '#62165C' }}
       id="sidebar"
-      >
-      
+    >
       <div className="sidebar-brand d-none d-md-flex align-items-center justify-content-center">
-        <Image 
-            width={200}
-            height={50}
-            src={currentLogin.brandLogo.url}
-            alt={currentLogin.loginTitle}  />
+        <Image width={200} height={50} src="https://www.datocms-assets.com/94718/1677628191-logo-dark-1.svg" alt="Hotwire" />
       </div>
 
       <div className="sidebar-nav flex-fill">

@@ -8,13 +8,9 @@ import Header from '@layout/AdminLayout/Header/Header'
 import Footer from '@layout/AdminLayout/Footer/Footer'
 import { Container } from 'react-bootstrap'
 
-
-export default function AdminLayout({ cmsData, children }: PropsWithChildren) {
+export default function AdminLayout({ children }: PropsWithChildren) {
   // Show status for xs screen
   const [isShowSidebar, setIsShowSidebar] = useState(false)
-
-  //console.log('data', cmsData);
-
   // Show status for md screen and above
   const [isShowSidebarMd, setIsShowSidebarMd] = useState(true)
 
@@ -56,10 +52,14 @@ export default function AdminLayout({ cmsData, children }: PropsWithChildren) {
 
       <div ref={ref} className="position-absolute w-100" />
 
-      <Sidebar isShow={isShowSidebar} isShowMd={isShowSidebarMd} logins={cmsData.logins} />
+      <Sidebar isShow={isShowSidebar} isShowMd={isShowSidebarMd} />
 
       <div className="wrapper d-flex flex-column min-vh-100 bg-light">
-        <Header clients={cmsData.clients} toggleSidebar={toggleIsShowSidebar} toggleSidebarMd={toggleIsShowSidebarMd} />
+        <Header
+          toggleSidebar={toggleIsShowSidebar}
+          toggleSidebarMd={toggleIsShowSidebarMd}
+          clientNo={1}
+        />
         <div className="body flex-grow-1 px-3">
           <Container fluid="lg">
             {children}

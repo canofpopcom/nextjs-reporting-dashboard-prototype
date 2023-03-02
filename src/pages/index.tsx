@@ -28,41 +28,42 @@ import {
   Tooltip,
 } from 'chart.js'
 import {
-  faCcAmex,
-  faCcApplePay,
-  faCcPaypal,
-  faCcStripe,
-  faCcVisa,
   faFacebookF,
   faLinkedinIn,
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons'
 import React from 'react'
+import { Image as DatoImage } from 'react-datocms'
+/* Get Graph */
+import { ClientsDocument, ClientsQuery } from '../../graphql/generated'
+import { datocms } from '../lib/datocms'
 
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Tooltip, Filler)
 
 const random = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min)
-
-/* Get Graph */
-import { LoginDocument, LoginQuery, ClientsDocument, ClientsQuery } from 'graphql/generated'
-import { datocms } from '../lib/datocms'
-import { Image as DatoImage } from 'react-datocms'
+type Props = { result: ClientsQuery }
 
 const Home: NextPage<Props> = ({ result }) => (
 
-  <AdminLayout cmsData={result}>
-    
+  <AdminLayout>
     <div className="row mt-2 mb-4 pt-6">
-      <div className="col-sm-8 col-lg-8 mb-8 ">
-        <h1 className="fw-semibold text-uppercase">WELCOME TO THE <br/>{result.clients.allClients[0].clientName} <span className="fw-normal">ACCOUNT IQ</span> HUB</h1>
+      <div className="col-sm-10 col-lg-9 mb-8 px-4">
+        <h1 className="fw-semibold mb-4 text-uppercase">
+          WELCOME TO THE
+          <br />
+          {result.allClients[0]?.clientName || ''}
+          <span className="fw-normal"> ACCOUNT IQ </span>
+          HUB
+        </h1>
+        <div className="row" dangerouslySetInnerHTML={{ __html: result.allClients[0]?.clientIntroSimple || '' }} />
       </div>
-      <div className="col-sm-0 col-lg-1 col-md-3">
-      </div>
-      <div className="col-sm-6 col-lg-3 mb-8 card pt-3 pb-2">
-      <DatoImage data={result.clients.allClients[0].clientLogo.responsiveImage} />
+      <div className="col-sm-6 col-lg-3 mb-8 pt-2 pb-2">
+        <div key={result.allClients[0]?.id}>
+          {result.allClients[0]?.clientLogo?.responsiveImage
+          && <DatoImage data={result.allClients[0].clientLogo.responsiveImage} />}
+        </div>
       </div>
     </div>
-
 
     <div className="row">
 
@@ -635,8 +636,11 @@ const Home: NextPage<Props> = ({ result }) => (
           <Card.Body>
             <div className="row text-center">
               <div className="col">
-              <a className="twitter-timeline" data-width="auto" data-height="500" data-theme="light" href={result.clients.allClients[0].url}>Tweets by {result.clients.allClients[0].clientName}</a> 
-              <script async src="https://platform.twitter.com/widgets.js"></script>
+                <a className="twitter-timeline" data-width="auto" data-height="500" data-theme="light" href={result.allClients[0]?.url || ''}>
+                  Tweets by
+                  {result.allClients[0]?.clientName || '' }
+                </a>
+                <script async src="https://platform.twitter.com/widgets.js"> </script>
               </div>
             </div>
           </Card.Body>
@@ -1259,7 +1263,7 @@ const Home: NextPage<Props> = ({ result }) => (
                           className="btn-link rounded-0 text-black-50 shadow-none p-0"
                           id="action-user1"
                         >
-                        <FontAwesomeIcon fixedWidth icon={faEllipsisVertical} />
+                          <FontAwesomeIcon fixedWidth icon={faEllipsisVertical} />
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                           <Dropdown.Item href="#/action-1">Info</Dropdown.Item>
@@ -1284,16 +1288,12 @@ const Home: NextPage<Props> = ({ result }) => (
   </AdminLayout>
 )
 
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   // retrieving the list of all articles
-  const loginData = await datocms(LoginDocument)
-  const clientData = await datocms(ClientsDocument)
-
-  const result = { logins: loginData, clients: clientData }
-
+  const result = await datocms(ClientsDocument)
   return {
     props: { result },
+    revalidate: 30, // In second
   }
 }
-
 export default Home

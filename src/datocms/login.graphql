@@ -14,6 +14,7 @@ query Login {
     _publishedAt
     brandLogo {
       url
+      alt
     }
   }
 }
