@@ -33,7 +33,6 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons'
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import { Image as DatoImage } from 'react-datocms'
 /* Get Graph */
 import { ClientsDocument, ClientsQuery } from '../../graphql/generated'
@@ -56,7 +55,7 @@ const Home: NextPage<Props> = ({ result }) => (
           <span className="fw-normal"> ACCOUNT IQ </span>
           HUB
         </h1>
-        <div className="row" dangerouslySetInnerHTML={{__html:result.allClients[0].clientIntroSimple}} />
+        <div className="row" dangerouslySetInnerHTML={{ __html: result.allClients[0].clientIntroSimple || '' }} />
       </div>
       <div className="col-sm-6 col-lg-3 mb-8 pt-2 pb-2">
         {result.allClients.map((client) => (

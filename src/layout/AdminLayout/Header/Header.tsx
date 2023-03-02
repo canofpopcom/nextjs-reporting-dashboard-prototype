@@ -29,8 +29,8 @@ export default function Header(props: HeaderProps) {
           <FontAwesomeIcon icon={faBars} />
         </Button>
         <Link href="/" className="header-brand d-md-none text-decoration-none">
-         <Image width={100} height={30} src="https://www.datocms-assets.com/94718/1677628191-logo-dark-1.svg" alt="Hotwire" />
-         <span className="px-2 pr-4 font-weight-bold align-middle">Account IQ</span>
+          <Image width={100} height={30} src="https://www.datocms-assets.com/94718/1677628191-logo-dark-1.svg" alt="Hotwire" />
+          <span className="px-2 pr-4 font-weight-bold align-middle">Account IQ</span>
         </Link>
         <div className="header-nav d-none d-md-flex">
           <HeaderFeaturedNav />
