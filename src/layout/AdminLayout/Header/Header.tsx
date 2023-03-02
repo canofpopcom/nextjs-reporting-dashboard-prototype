@@ -6,6 +6,7 @@ import HeaderFeaturedNav from '@layout/AdminLayout/Header/HeaderFeaturedNav'
 import HeaderNotificationNav from '@layout/AdminLayout/Header/HeaderNotificationNav'
 import HeaderProfileNav from '@layout/AdminLayout/Header/HeaderProfileNav'
 import { Button, Container } from 'react-bootstrap'
+import Image from 'next/image'
 
 type HeaderProps = {
   toggleSidebar: () => void;
@@ -27,11 +28,9 @@ export default function Header(props: HeaderProps) {
         <Button variant="link" className="header-toggler d-none d-md-inline-block px-md-0 me-md-3 rounded-0 shadow-none" type="button" onClick={toggleSidebarMd}>
           <FontAwesomeIcon icon={faBars} />
         </Button>
-        <Link href="/" className="header-brand d-md-none">
-          <svg width="118" height="46">
-            <title>HW Logo</title>
-            <use xlinkHref="/assets/brand/coreui.svg#full" />
-          </svg>
+        <Link href="/" className="header-brand d-md-none text-decoration-none">
+         <Image width={100} height={30} src="https://www.datocms-assets.com/94718/1677628191-logo-dark-1.svg" alt="Hotwire" />
+         <span className="px-2 pr-4 font-weight-bold align-middle">Account IQ</span>
         </Link>
         <div className="header-nav d-none d-md-flex">
           <HeaderFeaturedNav />
