@@ -108,14 +108,9 @@ const Login: NextPage<Props> = ({ result }) => {
               {result.allLogins.map((LoginDisp) => (
                 <Col key={LoginDisp.id} md={5} className="bg-primary text-white d-flex align-items-center justify-content-center p-5" style={{ backgroundColor: LoginDisp?.brandColour?.hex || 'grey' }}>
                   <div key={LoginDisp.id} className="text-center">
-                    <Image width={200} height={50} src={LoginDisp?.brandLogo?.url || ''} alt={LoginDisp?.brandLogo?.alt || 'Hotwire'} />
-                    <h2>{LoginDisp?.loginTitle || ''}</h2>
+                    <Image width={75} height={75} src={LoginDisp?.brandLogo?.url || ''} alt={LoginDisp?.brandLogo?.alt || 'Honeywell'} />
+                    <h3>{LoginDisp?.loginTitle || ''}</h3>
                     {LoginDisp?.loginIntro}
-                    <Link href="/register">
-                      <button className="btn btn-lg btn-outline-light mt-3" type="button">
-                        Setup Account
-                      </button>
-                    </Link>
                   </div>
                 </Col>
               ))}

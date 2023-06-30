@@ -25,6 +25,8 @@ export type Scalars = {
 export type AltFileField = FileFieldInterface & {
   __typename?: 'AltFileField';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _updatedAt: Scalars['DateTime'];
   alt: Scalars['String'];
   author?: Maybe<Scalars['String']>;
@@ -47,6 +49,7 @@ export type AltFileField = FileFieldInterface & {
   size: Scalars['IntType'];
   smartTags: Array<Scalars['String']>;
   tags: Array<Scalars['String']>;
+  thumbhash?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   url: Scalars['String'];
   video?: Maybe<UploadVideoField>;
@@ -98,6 +101,8 @@ export type AltFileFieldUrlArgs = {
   imgixParams?: InputMaybe<ImgixParams>;
 };
 
+export type ArticleModelAvailableToField = ClientRecord | RoleRecord;
+
 export type ArticleModelContentField = {
   __typename?: 'ArticleModelContentField';
   blocks: Array<Scalars['String']>;
@@ -106,6 +111,7 @@ export type ArticleModelContentField = {
 };
 
 export type ArticleModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ArticleModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ArticleModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -115,6 +121,7 @@ export type ArticleModelFilter = {
   _status?: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  availableTo?: InputMaybe<LinksFilter>;
   content?: InputMaybe<StructuredTextFilter>;
   id?: InputMaybe<ItemIdFilter>;
   image?: InputMaybe<FileFilter>;
@@ -149,6 +156,8 @@ export enum ArticleModelOrderBy {
 export type ArticleRecord = RecordInterface & {
   __typename?: 'ArticleRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -159,10 +168,11 @@ export type ArticleRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
-  content: ArticleModelContentField;
+  availableTo: Array<ArticleModelAvailableToField>;
+  content?: Maybe<ArticleModelContentField>;
   id: Scalars['ItemId'];
-  image: FileField;
-  slug: Scalars['String'];
+  image?: Maybe<FileField>;
+  slug?: Maybe<Scalars['String']>;
   title: Scalars['String'];
 };
 
@@ -179,6 +189,7 @@ export type BooleanFilter = {
 };
 
 export type ClientModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ClientModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ClientModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -249,6 +260,8 @@ export enum ClientModelOrderBy {
 export type ClientRecord = RecordInterface & {
   __typename?: 'ClientRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -311,6 +324,7 @@ export type ColorField = {
   __typename?: 'ColorField';
   alpha: Scalars['IntType'];
   blue: Scalars['IntType'];
+  cssRgb: Scalars['String'];
   green: Scalars['IntType'];
   hex: Scalars['String'];
   red: Scalars['IntType'];
@@ -340,6 +354,24 @@ export type CreatedAtFilter = {
   neq?: InputMaybe<Scalars['DateTime']>;
 };
 
+/** Specifies how to filter DateTime fields */
+export type DateTimeFilter = {
+  /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  eq?: InputMaybe<Scalars['DateTime']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']>;
+  /** Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gt?: InputMaybe<Scalars['DateTime']>;
+  /** Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gte?: InputMaybe<Scalars['DateTime']>;
+  /** Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lt?: InputMaybe<Scalars['DateTime']>;
+  /** Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lte?: InputMaybe<Scalars['DateTime']>;
+  /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  neq?: InputMaybe<Scalars['DateTime']>;
+};
+
 export enum FaviconType {
   AppleTouchIcon = 'appleTouchIcon',
   Icon = 'icon',
@@ -349,6 +381,8 @@ export enum FaviconType {
 export type FileField = FileFieldInterface & {
   __typename?: 'FileField';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _updatedAt: Scalars['DateTime'];
   alt?: Maybe<Scalars['String']>;
   author?: Maybe<Scalars['String']>;
@@ -371,6 +405,7 @@ export type FileField = FileFieldInterface & {
   size: Scalars['IntType'];
   smartTags: Array<Scalars['String']>;
   tags: Array<Scalars['String']>;
+  thumbhash?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   url: Scalars['String'];
   video?: Maybe<UploadVideoField>;
@@ -424,6 +459,8 @@ export type FileFieldUrlArgs = {
 
 export type FileFieldInterface = {
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _updatedAt: Scalars['DateTime'];
   alt?: Maybe<Scalars['String']>;
   author?: Maybe<Scalars['String']>;
@@ -446,6 +483,7 @@ export type FileFieldInterface = {
   size: Scalars['IntType'];
   smartTags: Array<Scalars['String']>;
   tags: Array<Scalars['String']>;
+  thumbhash?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   url: Scalars['String'];
   video?: Maybe<UploadVideoField>;
@@ -520,6 +558,31 @@ export type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars['String']>;
 };
 
+/** Block of type Google Looker Embed (google_looker_embed) */
+export type GoogleLookerEmbedRecord = RecordInterface & {
+  __typename?: 'GoogleLookerEmbedRecord';
+  _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+};
+
+
+/** Block of type Google Looker Embed (google_looker_embed) */
+export type GoogleLookerEmbedRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 export type ImgixParams = {
   /**
    * Aspect Ratio
@@ -547,6 +610,14 @@ export type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/bg)
    */
   bg?: InputMaybe<Scalars['String']>;
+  /**
+   * Background Removal
+   *
+   * Removes background from image.
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/rendering/background-removal/bg-remove)
+   */
+  bgRemove?: InputMaybe<Scalars['BooleanType']>;
   /**
    * Blend
    *
@@ -1000,6 +1071,18 @@ export type ImgixParams = {
    */
   fpZ?: InputMaybe<Scalars['FloatType']>;
   /**
+   * Frames Per Second
+   *
+   * Specifies the framerate of the generated image.
+   */
+  fps?: InputMaybe<Scalars['IntType']>;
+  /**
+   * Frame Selection
+   *
+   * Specifies the frame of an animated image to use.
+   */
+  frame?: InputMaybe<Scalars['String']>;
+  /**
    * Gamma
    *
    * Adjusts the gamma of the source image.
@@ -1007,6 +1090,12 @@ export type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/gam)
    */
   gam?: InputMaybe<Scalars['IntType']>;
+  /**
+   * Animated Gif Quality
+   *
+   * Depends on: `fm=gif`
+   */
+  gifQ?: InputMaybe<Scalars['IntType']>;
   /**
    * Grid Colors
    *
@@ -1056,6 +1145,12 @@ export type ImgixParams = {
    */
   hue?: InputMaybe<Scalars['IntType']>;
   /**
+   * Frame Interval
+   *
+   * Displays every Nth frame starting with the first frame.
+   */
+  interval?: InputMaybe<Scalars['IntType']>;
+  /**
    * Invert
    *
    * Inverts the colors on the source image.
@@ -1069,6 +1164,12 @@ export type ImgixParams = {
    * Determine if IPTC data should be passed for JPEG images.
    */
   iptc?: InputMaybe<ImgixParamsIptc>;
+  /**
+   * Animation Loop Count
+   *
+   * Specifies the number of times an animated image should repeat. A value of 0 means infinite looping.
+   */
+  loop?: InputMaybe<Scalars['IntType']>;
   /**
    * Lossless Compression
    *
@@ -1396,6 +1497,12 @@ export type ImgixParams = {
    */
   rect?: InputMaybe<Scalars['String']>;
   /**
+   * Reverse
+   *
+   * Reverses the frame order on the source animation.
+   */
+  reverse?: InputMaybe<Scalars['BooleanType']>;
+  /**
    * Rotation
    *
    * Rotates an image by a specified number of degrees.
@@ -1435,6 +1542,12 @@ export type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/sharp)
    */
   sharp?: InputMaybe<Scalars['FloatType']>;
+  /**
+   * Frame Skip
+   *
+   * Skips every Nth frame starting with the first frame.
+   */
+  skip?: InputMaybe<Scalars['IntType']>;
   /**
    * Transparency
    *
@@ -1908,7 +2021,95 @@ export enum ItemStatus {
   Updated = 'updated'
 }
 
+/** Specifies how to filter JSON fields */
+export type JsonFilter = {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']>;
+};
+
+export type LegalDocModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<LegalDocModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<LegalDocModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  parent?: InputMaybe<ParentFilter>;
+  position?: InputMaybe<PositionFilter>;
+};
+
+export enum LegalDocModelOrderBy {
+  _CreatedAtAsc = '_createdAt_ASC',
+  _CreatedAtDesc = '_createdAt_DESC',
+  _FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  _FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  _IsValidAsc = '_isValid_ASC',
+  _IsValidDesc = '_isValid_DESC',
+  _PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  _PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  _PublishedAtAsc = '_publishedAt_ASC',
+  _PublishedAtDesc = '_publishedAt_DESC',
+  _StatusAsc = '_status_ASC',
+  _StatusDesc = '_status_DESC',
+  _UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  _UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  _UpdatedAtAsc = '_updatedAt_ASC',
+  _UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PositionAsc = 'position_ASC',
+  PositionDesc = 'position_DESC'
+}
+
+/** Record of type Legals (legal_doc) */
+export type LegalDocRecord = RecordInterface & {
+  __typename?: 'LegalDocRecord';
+  _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  children?: Maybe<Array<Maybe<LegalDocRecord>>>;
+  id: Scalars['ItemId'];
+  parent?: Maybe<LegalDocRecord>;
+  position?: Maybe<Scalars['IntType']>;
+};
+
+
+/** Record of type Legals (legal_doc) */
+export type LegalDocRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Specifies how to filter Multiple-links fields */
+export type LinksFilter = {
+  /** Filter records linked to all of the specified records. The specified values must be Record IDs */
+  allIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
+  /** Filter records linked to at least one of the specified records. The specified values must be Record IDs */
+  anyIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
+  /** Search for records with an exact match. The specified values must be Record IDs */
+  eq?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']>;
+  /** Filter records not linked to any of the specified records. The specified values must be Record IDs */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
+};
+
 export type LoginModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<LoginModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<LoginModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -1952,6 +2153,8 @@ export enum LoginModelOrderBy {
 export type LoginRecord = RecordInterface & {
   __typename?: 'LoginRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1981,6 +2184,66 @@ export type LoginRecordLoginIntroArgs = {
   markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
+export type MessageModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<MessageModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<MessageModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+};
+
+export enum MessageModelOrderBy {
+  _CreatedAtAsc = '_createdAt_ASC',
+  _CreatedAtDesc = '_createdAt_DESC',
+  _FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  _FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  _IsValidAsc = '_isValid_ASC',
+  _IsValidDesc = '_isValid_DESC',
+  _PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  _PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  _PublishedAtAsc = '_publishedAt_ASC',
+  _PublishedAtDesc = '_publishedAt_DESC',
+  _StatusAsc = '_status_ASC',
+  _StatusDesc = '_status_DESC',
+  _UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  _UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  _UpdatedAtAsc = '_updatedAt_ASC',
+  _UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC'
+}
+
+/** Record of type Messages (message) */
+export type MessageRecord = RecordInterface & {
+  __typename?: 'MessageRecord';
+  _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+};
+
+
+/** Record of type Messages (message) */
+export type MessageRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 export enum MuxThumbnailFormatType {
   Gif = 'gif',
   Jpg = 'jpg',
@@ -1993,6 +2256,30 @@ export type OrientationFilter = {
   eq?: InputMaybe<UploadOrientation>;
   /** Exclude uploads with the specified orientation */
   neq?: InputMaybe<UploadOrientation>;
+};
+
+/** Specifies how to filter by parent (tree-like collections only) */
+export type ParentFilter = {
+  /** Filter records children of the specified record. Value must be a Record ID */
+  eq?: InputMaybe<Scalars['ItemId']>;
+  /** Filter records with a parent record or not */
+  exists?: InputMaybe<Scalars['BooleanType']>;
+};
+
+/** Specifies how to filter by position (sorted and tree-like collections) */
+export type PositionFilter = {
+  /** Search for records with an exact match */
+  eq?: InputMaybe<Scalars['IntType']>;
+  /** Filter records with a value that's strictly greater than the one specified */
+  gt?: InputMaybe<Scalars['IntType']>;
+  /** Filter records with a value that's greater than or equal to the one specified */
+  gte?: InputMaybe<Scalars['IntType']>;
+  /** Filter records with a value that's less than the one specified */
+  lt?: InputMaybe<Scalars['IntType']>;
+  /** Filter records with a value that's less or equal than the one specified */
+  lte?: InputMaybe<Scalars['IntType']>;
+  /** Exclude records with an exact match */
+  neq?: InputMaybe<Scalars['IntType']>;
 };
 
 /** Specifies how to filter by publication datetime */
@@ -2021,9 +2308,21 @@ export type Query = {
   /** Returns meta information regarding a record collection */
   _allClientsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allLegalDocsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allLoginsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allMessagesMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allReportsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allResourcesMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allRolesMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allTypesMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
-  _allUploadsMeta?: Maybe<CollectionMetadata>;
+  _allUploadsMeta: CollectionMetadata;
   /** Returns the single instance record */
   _site: Site;
   /** Returns a collection of records */
@@ -2031,7 +2330,19 @@ export type Query = {
   /** Returns a collection of records */
   allClients: Array<ClientRecord>;
   /** Returns a collection of records */
+  allLegalDocs: Array<LegalDocRecord>;
+  /** Returns a collection of records */
   allLogins: Array<LoginRecord>;
+  /** Returns a collection of records */
+  allMessages: Array<MessageRecord>;
+  /** Returns a collection of records */
+  allReports: Array<ReportRecord>;
+  /** Returns a collection of records */
+  allResources: Array<ResourceRecord>;
+  /** Returns a collection of records */
+  allRoles: Array<RoleRecord>;
+  /** Returns a collection of records */
+  allTypes: Array<TypeRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns a specific record */
@@ -2039,7 +2350,19 @@ export type Query = {
   /** Returns a specific record */
   client?: Maybe<ClientRecord>;
   /** Returns a specific record */
+  legalDoc?: Maybe<LegalDocRecord>;
+  /** Returns a specific record */
   login?: Maybe<LoginRecord>;
+  /** Returns a specific record */
+  message?: Maybe<MessageRecord>;
+  /** Returns a specific record */
+  report?: Maybe<ReportRecord>;
+  /** Returns a specific record */
+  resource?: Maybe<ResourceRecord>;
+  /** Returns a specific record */
+  role?: Maybe<RoleRecord>;
+  /** Returns a specific record */
+  type?: Maybe<TypeRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
 };
@@ -2047,7 +2370,6 @@ export type Query = {
 
 /** The query root for this schema */
 export type Query_AllArticlesMetaArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<ArticleModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
@@ -2055,16 +2377,56 @@ export type Query_AllArticlesMetaArgs = {
 
 /** The query root for this schema */
 export type Query_AllClientsMetaArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<ClientModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
 
 /** The query root for this schema */
+export type Query_AllLegalDocsMetaArgs = {
+  filter?: InputMaybe<LegalDocModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
 export type Query_AllLoginsMetaArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<LoginModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllMessagesMetaArgs = {
+  filter?: InputMaybe<MessageModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllReportsMetaArgs = {
+  filter?: InputMaybe<ReportModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllResourcesMetaArgs = {
+  filter?: InputMaybe<ResourceModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllRolesMetaArgs = {
+  filter?: InputMaybe<RoleModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllTypesMetaArgs = {
+  filter?: InputMaybe<TypeModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -2106,12 +2468,78 @@ export type QueryAllClientsArgs = {
 
 
 /** The query root for this schema */
+export type QueryAllLegalDocsArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<LegalDocModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<LegalDocModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
 export type QueryAllLoginsArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<LoginModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<LoginModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
+export type QueryAllMessagesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<MessageModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<MessageModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
+export type QueryAllReportsArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ReportModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ReportModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
+export type QueryAllResourcesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ResourceModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ResourceModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
+export type QueryAllRolesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<RoleModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<RoleModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
+export type QueryAllTypesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<TypeModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<TypeModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']>;
 };
 
@@ -2146,11 +2574,65 @@ export type QueryClientArgs = {
 
 
 /** The query root for this schema */
+export type QueryLegalDocArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<LegalDocModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<LegalDocModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
 export type QueryLoginArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<LoginModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<LoginModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryMessageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<MessageModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<MessageModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryReportArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ReportModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ReportModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryResourceArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ResourceModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ResourceModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryRoleArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<RoleModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<RoleModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryTypeArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<TypeModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<TypeModelOrderBy>>>;
 };
 
 
@@ -2164,6 +2646,8 @@ export type QueryUploadArgs = {
 
 export type RecordInterface = {
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -2179,6 +2663,102 @@ export type RecordInterface = {
 
 
 export type RecordInterface_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+export type ReportModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ReportModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ReportModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  enabled?: InputMaybe<BooleanFilter>;
+  htmlEmbed?: InputMaybe<StructuredTextFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  jsonForEmbed?: InputMaybe<JsonFilter>;
+  reportDataTime?: InputMaybe<DateTimeFilter>;
+  reportImageFallBack?: InputMaybe<FileFilter>;
+  reportIntroOptional?: InputMaybe<StructuredTextFilter>;
+  reportName?: InputMaybe<StringFilter>;
+  reportVisibleTo?: InputMaybe<LinksFilter>;
+};
+
+export type ReportModelHtmlEmbedField = {
+  __typename?: 'ReportModelHtmlEmbedField';
+  blocks: Array<Scalars['String']>;
+  links: Array<Scalars['String']>;
+  value: Scalars['JsonField'];
+};
+
+export enum ReportModelOrderBy {
+  _CreatedAtAsc = '_createdAt_ASC',
+  _CreatedAtDesc = '_createdAt_DESC',
+  _FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  _FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  _IsValidAsc = '_isValid_ASC',
+  _IsValidDesc = '_isValid_DESC',
+  _PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  _PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  _PublishedAtAsc = '_publishedAt_ASC',
+  _PublishedAtDesc = '_publishedAt_DESC',
+  _StatusAsc = '_status_ASC',
+  _StatusDesc = '_status_DESC',
+  _UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  _UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  _UpdatedAtAsc = '_updatedAt_ASC',
+  _UpdatedAtDesc = '_updatedAt_DESC',
+  EnabledAsc = 'enabled_ASC',
+  EnabledDesc = 'enabled_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  ReportDataTimeAsc = 'reportDataTime_ASC',
+  ReportDataTimeDesc = 'reportDataTime_DESC',
+  ReportNameAsc = 'reportName_ASC',
+  ReportNameDesc = 'reportName_DESC'
+}
+
+export type ReportModelReportIntroOptionalField = {
+  __typename?: 'ReportModelReportIntroOptionalField';
+  blocks: Array<Scalars['String']>;
+  links: Array<Scalars['String']>;
+  value: Scalars['JsonField'];
+};
+
+/** Record of type Reports (report) */
+export type ReportRecord = RecordInterface & {
+  __typename?: 'ReportRecord';
+  _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  enabled?: Maybe<Scalars['BooleanType']>;
+  htmlEmbed?: Maybe<ReportModelHtmlEmbedField>;
+  id: Scalars['ItemId'];
+  jsonForEmbed?: Maybe<Scalars['JsonField']>;
+  reportDataTime?: Maybe<Scalars['DateTime']>;
+  reportImageFallBack?: Maybe<FileField>;
+  reportIntroOptional?: Maybe<ReportModelReportIntroOptionalField>;
+  reportName?: Maybe<Scalars['String']>;
+  reportVisibleTo: Array<RoleRecord>;
+};
+
+
+/** Record of type Reports (report) */
+export type ReportRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -2201,6 +2781,66 @@ export enum ResolutionType {
   Small = 'small'
 }
 
+export type ResourceModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ResourceModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ResourceModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+};
+
+export enum ResourceModelOrderBy {
+  _CreatedAtAsc = '_createdAt_ASC',
+  _CreatedAtDesc = '_createdAt_DESC',
+  _FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  _FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  _IsValidAsc = '_isValid_ASC',
+  _IsValidDesc = '_isValid_DESC',
+  _PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  _PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  _PublishedAtAsc = '_publishedAt_ASC',
+  _PublishedAtDesc = '_publishedAt_DESC',
+  _StatusAsc = '_status_ASC',
+  _StatusDesc = '_status_DESC',
+  _UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  _UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  _UpdatedAtAsc = '_updatedAt_ASC',
+  _UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC'
+}
+
+/** Record of type Resources (resource) */
+export type ResourceRecord = RecordInterface & {
+  __typename?: 'ResourceRecord';
+  _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+};
+
+
+/** Record of type Resources (resource) */
+export type ResourceRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 export type ResponsiveImage = {
   __typename?: 'ResponsiveImage';
   alt?: Maybe<Scalars['String']>;
@@ -2214,6 +2854,85 @@ export type ResponsiveImage = {
   title?: Maybe<Scalars['String']>;
   webpSrcSet: Scalars['String'];
   width: Scalars['IntType'];
+};
+
+export type RoleModelCanSeeField = ClientRecord | TypeRecord;
+
+export type RoleModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<RoleModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<RoleModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  canSee?: InputMaybe<LinksFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  role?: InputMaybe<StringFilter>;
+  roleDefaultImage?: InputMaybe<FileFilter>;
+  roleDescription?: InputMaybe<StructuredTextFilter>;
+};
+
+export enum RoleModelOrderBy {
+  _CreatedAtAsc = '_createdAt_ASC',
+  _CreatedAtDesc = '_createdAt_DESC',
+  _FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  _FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  _IsValidAsc = '_isValid_ASC',
+  _IsValidDesc = '_isValid_DESC',
+  _PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  _PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  _PublishedAtAsc = '_publishedAt_ASC',
+  _PublishedAtDesc = '_publishedAt_DESC',
+  _StatusAsc = '_status_ASC',
+  _StatusDesc = '_status_DESC',
+  _UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  _UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  _UpdatedAtAsc = '_updatedAt_ASC',
+  _UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  RoleAsc = 'role_ASC',
+  RoleDesc = 'role_DESC'
+}
+
+export type RoleModelRoleDescriptionField = {
+  __typename?: 'RoleModelRoleDescriptionField';
+  blocks: Array<Scalars['String']>;
+  links: Array<Scalars['String']>;
+  value: Scalars['JsonField'];
+};
+
+/** Record of type Roles (role) */
+export type RoleRecord = RecordInterface & {
+  __typename?: 'RoleRecord';
+  _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  canSee: Array<RoleModelCanSeeField>;
+  id: Scalars['ItemId'];
+  role: Scalars['String'];
+  roleDefaultImage?: Maybe<FileField>;
+  roleDescription?: Maybe<RoleModelRoleDescriptionField>;
+};
+
+
+/** Record of type Roles (role) */
+export type RoleRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
 };
 
 export type SeoField = {
@@ -2346,6 +3065,66 @@ export type TypeFilter = {
   notIn?: InputMaybe<Array<InputMaybe<UploadType>>>;
 };
 
+export type TypeModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<TypeModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<TypeModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+};
+
+export enum TypeModelOrderBy {
+  _CreatedAtAsc = '_createdAt_ASC',
+  _CreatedAtDesc = '_createdAt_DESC',
+  _FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  _FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  _IsValidAsc = '_isValid_ASC',
+  _IsValidDesc = '_isValid_DESC',
+  _PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  _PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  _PublishedAtAsc = '_publishedAt_ASC',
+  _PublishedAtDesc = '_publishedAt_DESC',
+  _StatusAsc = '_status_ASC',
+  _StatusDesc = '_status_DESC',
+  _UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  _UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  _UpdatedAtAsc = '_updatedAt_ASC',
+  _UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC'
+}
+
+/** Record of type Types (type) */
+export type TypeRecord = RecordInterface & {
+  __typename?: 'TypeRecord';
+  _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+};
+
+
+/** Record of type Types (type) */
+export type TypeRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Specifies how to filter by update datetime */
 export type UpdatedAtFilter = {
   /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
@@ -2449,6 +3228,7 @@ export type UploadFilenameFilter = {
 };
 
 export type UploadFilter = {
+  AND?: InputMaybe<Array<InputMaybe<UploadFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<UploadFilter>>>;
   _createdAt?: InputMaybe<UploadCreatedAtFilter>;
   _updatedAt?: InputMaybe<UploadUpdatedAtFilter>;
@@ -2719,7 +3499,7 @@ export type ResponsiveImageFragment = ResponsiveImage_AltFileField_Fragment | Re
 export type HomeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomeQuery = { __typename?: 'Query', allArticles: Array<{ __typename?: 'ArticleRecord', id: string, title: string, _createdAt: string, _publishedAt?: string | null, image: { __typename?: 'FileField', url: string } }> };
+export type HomeQuery = { __typename?: 'Query', allArticles: Array<{ __typename?: 'ArticleRecord', id: string, title: string, _createdAt: string, _publishedAt?: string | null, image?: { __typename?: 'FileField', url: string } | null }> };
 
 export type LoginQueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -76,23 +76,6 @@ export default function HeaderProfileNav() {
               </ProfileDropdownItem>
             </Dropdown.Item>
           </Link>
-          <Link href="/" passHref legacyBehavior>
-            <Dropdown.Item>
-              <ProfileDropdownItem icon={faListCheck}>
-                Tasks
-                <Badge bg="danger" className="ms-2">42</Badge>
-              </ProfileDropdownItem>
-            </Dropdown.Item>
-          </Link>
-          <Link href="/" passHref legacyBehavior>
-            <Dropdown.Item>
-              <ProfileDropdownItem icon={faMessage}>
-                Messages
-                <Badge bg="warning" className="ms-2">42</Badge>
-              </ProfileDropdownItem>
-            </Dropdown.Item>
-          </Link>
-
           <Dropdown.Header className="bg-light fw-bold">Settings</Dropdown.Header>
           <Link href="/" passHref legacyBehavior>
             <Dropdown.Item>
@@ -102,16 +85,6 @@ export default function HeaderProfileNav() {
           <Link href="/" passHref legacyBehavior>
             <Dropdown.Item>
               <ProfileDropdownItem icon={faGear}>Settings</ProfileDropdownItem>
-            </Dropdown.Item>
-          </Link>
-          <Link href="/" passHref legacyBehavior>
-            <Dropdown.Item>
-              <ProfileDropdownItem icon={faCreditCard}>Payments</ProfileDropdownItem>
-            </Dropdown.Item>
-          </Link>
-          <Link href="/" passHref legacyBehavior>
-            <Dropdown.Item>
-              <ProfileDropdownItem icon={faFile}>Projects</ProfileDropdownItem>
             </Dropdown.Item>
           </Link>
 

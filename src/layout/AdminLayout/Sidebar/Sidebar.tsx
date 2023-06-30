@@ -31,11 +31,11 @@ export default function Sidebar(props: { isShow: boolean; isShowMd: boolean }) {
         show: isShow,
         'md-hide': !isShowMd,
       })}
-      style={{ backgroundColor: '#62165C' }}
+      style={{ backgroundColor: 'black' }}
       id="sidebar"
     >
-      <div className="sidebar-brand d-none d-md-flex align-items-center justify-content-center">
-        <Image width={200} height={50} src="https://www.datocms-assets.com/94718/1677628191-logo-dark-1.svg" alt="Hotwire" />
+      <div className="sidebar-brand d-none d-md-flex align-items-center justify-content-center" style={{ backgroundColor: 'white' }}>
+        <Image width={160} height={45} src="https://www.datocms-assets.com/94718/1677668105-logo.png?auto=format&h=300&w=300" alt="Honeywell" />
       </div>
 
       <div className="sidebar-nav flex-fill">
