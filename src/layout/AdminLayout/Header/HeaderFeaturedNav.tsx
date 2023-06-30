@@ -9,16 +9,6 @@ export default function HeaderFeaturedNav() {
           <Nav.Link className="p-2 fw-semibold">Account IQ</Nav.Link>
         </Link>
       </Nav.Item>
-      <Nav.Item>
-        <Link href="/" passHref legacyBehavior>
-          <Nav.Link className="p-2">Users</Nav.Link>
-        </Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Link href="/" passHref legacyBehavior>
-          <Nav.Link className="p-2">Settings</Nav.Link>
-        </Link>
-      </Nav.Item>
     </Nav>
   )
 }

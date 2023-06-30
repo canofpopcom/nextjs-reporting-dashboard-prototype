@@ -127,63 +127,47 @@ export default function SidebarNav() {
   return (
     <ul className="list-unstyled">
       <SidebarNavItem icon={faGauge} href="/">
-        Dashboard
+        Welcome Screen 
         <small className="ms-auto"><Badge bg="info" className="ms-auto">NEW</Badge></small>
       </SidebarNavItem>
-      <SidebarNavItem icon={faCode} href="/pokemons">
-        Sample (SSR)
-        <small className="ms-auto"><Badge bg="danger" className="ms-auto">DEMO</Badge></small>
-      </SidebarNavItem>
-      <SidebarNavItem icon={faCode} href="/pokemons/client">
-        Sample (CSR)
-        <small className="ms-auto"><Badge bg="danger" className="ms-auto">DEMO</Badge></small>
-      </SidebarNavItem>
-      <SidebarNavTitle>Useful Links</SidebarNavTitle>
-      <SidebarNavItem icon={faDroplet} href="https://coreui.io/demos/next-js/1.0/dark/components/colors.html">Colors</SidebarNavItem>
-      <SidebarNavItem icon={faPencil} href="https://coreui.io/demos/next-js/1.0/dark/components/typography.html">Typography</SidebarNavItem>
-      <SidebarNavTitle>Types of Available Components</SidebarNavTitle>
-
-      <SidebarNavItem icon={faChartPie} href="https://coreui.io/demos/next-js/1.0/dark/plugins/charts">Charts</SidebarNavItem>
-
-      <SidebarNavGroup toggleIcon={faFileLines} toggleText="Forms">
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/form-control">Form Control</SidebarNavItem>
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/select.html">Select</SidebarNavItem>
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/checks-radios.html">Checks and radios</SidebarNavItem>
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/range.html">Range</SidebarNavItem>
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/input-group.html">Input group</SidebarNavItem>
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/floating-labels.html">Floating labels</SidebarNavItem>
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/layout.html">Layout</SidebarNavItem>
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/forms/validation.html">Validation</SidebarNavItem>
-      </SidebarNavGroup>
-
-      <SidebarNavGroup toggleIcon={faStar} toggleText="Icons">
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/icons/coreui-icons-free.html">CoreUI Icons</SidebarNavItem>
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/icons/coreui-icons-brand.html">CoreUI Icons - Brand</SidebarNavItem>
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/icons/coreui-icons-flag.html">CoreUI Icons - Flag</SidebarNavItem>
-      </SidebarNavGroup>
-
+      <SidebarNavTitle>Insights</SidebarNavTitle>
+      <SidebarNavItem icon={faStar} href="./insights/latest-news">Latest News</SidebarNavItem>      
       <SidebarNavGroup toggleIcon={faBell} toggleText="Notifications">
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/notifications/alerts.html">Alerts</SidebarNavItem>
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/notifications/badge.html">Badge</SidebarNavItem>
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/notifications/modals.html">Modals</SidebarNavItem>
-        <SidebarNavItem href="https://coreui.io/demos/next-js/1.0/dark/components/notifications/toasts.html">Toasts</SidebarNavItem>
+        <SidebarNavItem href="">Alerts</SidebarNavItem>
+        <SidebarNavItem href="">Badge</SidebarNavItem>
+        <SidebarNavItem href="">Modals</SidebarNavItem>
+        <SidebarNavItem href="">Toasts</SidebarNavItem>
       </SidebarNavGroup>
 
-      <SidebarNavItem icon={faCalculator} href="https://coreui.io/demos/next-js/1.0/dark/components/widgets">
-        Widgets
-        <small className="ms-auto"><Badge bg="info">NEW</Badge></small>
-      </SidebarNavItem>
+      <SidebarNavTitle>Reports</SidebarNavTitle>
+
+      <SidebarNavItem icon={faChartPie} href="https://coreui.io/demos/next-js/1.0/dark/plugins/charts">Client Dashboard</SidebarNavItem>
+
+      <SidebarNavGroup toggleIcon={faFileLines} toggleText="Client A">
+        <SidebarNavItem href="">Report A</SidebarNavItem>
+        <SidebarNavItem href="">Report B</SidebarNavItem>
+        <SidebarNavItem href="">Report C</SidebarNavItem>
+      </SidebarNavGroup>
+
+      <SidebarNavGroup toggleIcon={faFileLines} toggleText="Client B">
+        <SidebarNavItem href="">Report A</SidebarNavItem>
+        <SidebarNavItem href="">Report B</SidebarNavItem>
+        <SidebarNavItem href="">Report C</SidebarNavItem>
+      </SidebarNavGroup>
 
       <SidebarNavTitle>Resources</SidebarNavTitle>
 
-      <SidebarNavGroup toggleIcon={faStar} toggleText="Pages">
+      <SidebarNavGroup toggleIcon={faStar} toggleText="Toolkits">
         <SidebarNavItem icon={faRightToBracket} href="login">Login</SidebarNavItem>
         <SidebarNavItem icon={faAddressCard} href="register">Register</SidebarNavItem>
         <SidebarNavItem icon={faBug} href="404.html">Error 404</SidebarNavItem>
         <SidebarNavItem icon={faBug} href="500.html">Error 500</SidebarNavItem>
       </SidebarNavGroup>
 
-      <SidebarNavItem icon={faFileLines} href="docs.html">Docs</SidebarNavItem>
+      <SidebarNavTitle>Misc</SidebarNavTitle>
+
+      <SidebarNavItem icon={faFileLines} href="docs.html">Legals</SidebarNavItem>
+      <SidebarNavItem icon={faRightToBracket} href="login">Log Out</SidebarNavItem>
     </ul>
   )
 }
