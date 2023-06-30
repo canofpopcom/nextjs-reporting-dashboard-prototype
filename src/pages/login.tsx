@@ -6,7 +6,6 @@ import {
   Button, Col, Container, Form, InputGroup, Row,
 } from 'react-bootstrap'
 
-import Link from 'next/link'
 import { SyntheticEvent, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
