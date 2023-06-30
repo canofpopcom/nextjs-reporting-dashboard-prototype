@@ -5,16 +5,13 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBell,
-  faCreditCard,
   faEnvelopeOpen,
-  faFile,
-  faMessage,
   faUser,
 } from '@fortawesome/free-regular-svg-icons'
 import { PropsWithChildren } from 'react'
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import {
-  faGear, faListCheck, faLock, faPowerOff,
+  faGear, faLock, faPowerOff,
 } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import axios from 'axios'

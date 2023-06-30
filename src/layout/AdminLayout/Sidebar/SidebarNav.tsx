@@ -8,12 +8,9 @@ import {
 } from '@fortawesome/free-regular-svg-icons'
 import {
   faBug,
-  faCalculator,
   faChartPie,
-  faChevronUp, faCode,
-  faDroplet,
+  faChevronUp,
   faGauge,
-  faPencil,
   faRightToBracket,
 } from '@fortawesome/free-solid-svg-icons'
 import React, {
@@ -127,11 +124,11 @@ export default function SidebarNav() {
   return (
     <ul className="list-unstyled">
       <SidebarNavItem icon={faGauge} href="/">
-        Welcome Screen 
+        Welcome Screen
         <small className="ms-auto"><Badge bg="info" className="ms-auto">NEW</Badge></small>
       </SidebarNavItem>
       <SidebarNavTitle>Insights</SidebarNavTitle>
-      <SidebarNavItem icon={faStar} href="./insights/latest-news">Latest News</SidebarNavItem>      
+      <SidebarNavItem icon={faStar} href="./insights/latest-news">Latest News</SidebarNavItem>
       <SidebarNavGroup toggleIcon={faBell} toggleText="Notifications">
         <SidebarNavItem href="">Alerts</SidebarNavItem>
         <SidebarNavItem href="">Badge</SidebarNavItem>
